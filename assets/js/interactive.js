@@ -1,3 +1,94 @@
+// --- LÓGICA PARA O MODAL DO CONCÍLIO DE NICEIA ---
+function setupCouncilModal() {
+    const modal = document.getElementById("councilModal");
+    const figures = document.querySelectorAll(".council-figure");
+    const closeBtn = document.querySelector(".close-button");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+
+    const arguments = {
+        "atnasio": {
+            title: "Argumento de Atanásio",
+            text: "Cristo é 'homoousios' (da mesma substância) que o Pai. Ele não é uma criatura, mas é eternamente Deus. Se Cristo fosse menos que Deus, não poderia nos salvar."
+        },
+        "ario": {
+            title: "Argumento de Ário",
+            text: "Cristo é 'homoiousios' (de substância semelhante) ao Pai. Houve um tempo em que o Filho não existia. Ele é a primeira e mais elevada de todas as criaturas de Deus, mas não é Deus."
+        }
+    };
+
+    figures.forEach(figure => {
+        figure.addEventListener("click", () => {
+            const person = figure.dataset.person;
+            modalTitle.textContent = arguments[person].title;
+            modalText.textContent = arguments[person].text;
+            modal.style.display = "block";
+        });
+    });
+
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
+}
+
+// --- LÓGICA PARA O CARROSSEL DA SABEDORIA ---
+function setupWisdomCarousel() {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".carousel-slide");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[n].classList.add('active');
+    }
+
+    prevBtn.addEventListener("click", () => {
+        slideIndex = (slideIndex > 0) ? slideIndex - 1 : slides.length - 1;
+        showSlide(slideIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+        slideIndex = (slideIndex < slides.length - 1) ? slideIndex + 1 : 0;
+        showSlide(slideIndex);
+    });
+    
+    // Mostra o primeiro slide
+    if(slides.length > 0) showSlide(slideIndex);
+}
+
+// Dentro de "DOMContentLoaded", adicione as chamadas para as novas funções
+document.addEventListener("DOMContentLoaded", () => {
+    // ... seu código existente ...
+
+    // --- CHAMADAS PARA O MÓDULO 3 ---
+    if (document.getElementById("councilModal")) {
+        setupCouncilModal();
+    }
+    if (document.querySelector(".wisdom-carousel")) {
+        setupWisdomCarousel();
+    }
+    // Reutilizando a função de scroll para as colunas
+    if (document.querySelector('.world-column')) {
+        const columns = document.querySelectorAll(".world-column");
+        function revealColumns() {
+             const windowHeight = window.innerHeight;
+             columns.forEach(col => {
+                if (col.getBoundingClientRect().top < windowHeight - 100) {
+                    col.classList.add("visible");
+                }
+             });
+        }
+        revealColumns();
+        window.addEventListener("scroll", revealColumns);
+    }
+});
 // Implementação do "Clique para Revelar"
 document.addEventListener("DOMContentLoaded", () => {
     const revealToggles = document.querySelectorAll(".reveal-toggle");
