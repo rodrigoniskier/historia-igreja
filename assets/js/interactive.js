@@ -180,5 +180,38 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.querySelector('.quiz-container')) {
         setupQuiz();
     }
+// --- LÓGICA GENÉRICA PARA REVELAR SEÇÕES AO ROLAR ---
+function setupScrollReveal() {
+    const sectionsToReveal = document.querySelectorAll(".home-section");
+
+    const revealSection = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target); // Para a animação não repetir
+            }
+        });
+    };
+
+    const sectionObserver = new IntersectionObserver(revealSection, {
+        root: null,
+        threshold: 0.15,
+    });
+
+    sectionsToReveal.forEach(section => {
+        sectionObserver.observe(section);
+    });
+}
+
+
+// Dentro de "DOMContentLoaded", adicione a chamada para a nova função
+document.addEventListener("DOMContentLoaded", () => {
+    // ... seu código existente ...
+
+    // --- CHAMADA PARA A NOVA PÁGINA INICIAL ---
+    if (document.querySelector('.home-section')) {
+        setupScrollReveal();
+    }
+});
 });
 
