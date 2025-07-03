@@ -1,235 +1,200 @@
-/* Variáveis CSS para cores */
+/* =================================================================
+   NOVO ARQUIVO STYLE.CSS - TEMA MODERNO DARK MODE
+   ================================================================= */
+
+/* --- Importando a fonte do Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* --- NOVAS Variáveis CSS (Paleta Moderna) --- */
 :root {
-    --color-primary: #4A2C2A; /* Marrom escuro para texto principal e cabeçalhos */
-    --color-secondary: #8B4513; /* Sépia/Marrom para detalhes e links */
-    --color-accent: #B8860B; /* Dourado para elementos interativos e destaques */
-    --color-background: #F5F5DC; /* Pergaminho/Bege claro para o fundo */
-    --color-text-light: #FFFFFF; /* Branco para texto em fundos escuros */
-    --color-text-dark: #333333; /* Cinza escuro para texto geral */
+    --color-background: #0D1117; /* Fundo Azul-Preto (GitHub Dark Mode) */
+    --color-surface: #161B22;   /* Superfície para painéis e seções */
+    --color-primary: #FFFFFF;     /* Texto principal (Branco) */
+    --color-secondary: #8B949E;   /* Texto secundário (Cinza claro) */
+    
+    /* O destaque principal: um gradiente vibrante */
+    --gradient-accent: linear-gradient(90deg, #1E90FF, #00BFFF); 
+    --color-accent-start: #1E90FF; /* Azul Dodger */
+    --color-accent-end: #00BFFF;   /* Ciano (Deep Sky Blue) */
+
+    --border-color: #30363D;     /* Cor da borda sutil */
 }
 
-/* Estilos globais */
-body {
-    font-family: 'Merriweather', serif; /* Fonte serifada clássica para o corpo */
-    line-height: 1.6;
+/* --- Estilos Globais e Reset --- */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
     background-color: var(--color-background);
-    color: var(--color-text-dark);
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Garamond', serif; /* Outra fonte serifada para títulos */
     color: var(--color-primary);
-    margin-bottom: 0.5em;
+    line-height: 1.7;
 }
 
-/* Layout principal */
 .container {
     max-width: 960px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
-/* Cabeçalho (Header) */
-header {
-    background-color: var(--color-primary);
-    color: var(--color-text-light);
-    padding: 40px 0;
+/* --- Tipografia --- */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
+h3 { font-size: 1.5rem; }
+p { color: var(--color-secondary); margin-bottom: 1rem; }
+
+/* --- Hero Section (Página Inicial) --- */
+.hero {
+    background-color: var(--color-surface);
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 120px 20px;
+}
+.hero h1 {
+    font-weight: 700;
+    font-size: 3.8rem;
+}
+.hero p {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 1rem auto 2rem;
 }
 
-header h1 {
-    color: var(--color-text-light);
-    font-size: 2.8em;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 1.2em;
-    opacity: 0.9;
-}
-
-/* Seções de conteúdo */
-section {
-    background-color: #FFFFFF;
-    margin: 20px 0;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-section h2 {
-    font-size: 2em;
-    border-bottom: 2px solid var(--color-secondary);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-section h3 {
-    font-size: 1.5em;
-    color: var(--color-secondary);
-    margin-top: 25px;
-}
-
-/* --- MELHORIA: Botões com mais destaque --- */
+/* --- Botão Principal (Ação e Motivação) --- */
 .btn {
     display: inline-block;
-    background-color: var(--color-accent);
-    color: var(--color-text-light);
-    padding: 15px 30px; /* Um pouco maior para mais destaque */
-    border-radius: 8px; /* Bordas mais arredondadas são mais amigáveis */
+    background-image: var(--gradient-accent);
+    color: var(--color-primary);
+    padding: 15px 35px;
+    border-radius: 50px; /* Totalmente arredondado */
     text-decoration: none;
-    font-weight: bold;
-    font-family: 'Merriweather', serif; /* Consistência com a fonte do corpo */
-    text-transform: uppercase; /* Deixa o texto mais formal e com cara de botão */
-    letter-spacing: 1px; /* Leve espaçamento entre as letras */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidade */
-    transition: all 0.2s ease-in-out; /* Transição para todas as propriedades */
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 191, 255, 0.2); /* Sombra/brilho com a cor de destaque */
+    transition: all 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #DAA520; /* Um dourado um pouco mais escuro no hover */
-    transform: translateY(-2px); /* Efeito de "levantar" ao passar o mouse */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra mais forte no hover */
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
 }
 
-/* Hero Section para a landing page */
-.hero {
-    background: url('../../assets/images/hero_background.jpg') no-repeat center center/cover;
-    color: var(--color-text-light);
-    text-align: center;
-    padding: 100px 20px;
-    position: relative;
+/* --- Seções e Painéis --- */
+section {
+    background-color: var(--color-surface);
+    margin: 20px 0;
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-}
-
-.hero h1 {
-    font-size: 3.5em;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    font-size: 1.5em;
-    margin-bottom: 30px;
-}
-
-/* Seção 'Sobre' */
-.about {
-    padding: 60px 0;
-    text-align: center;
-}
-
-/* Seção 'Features' */
-.features {
-    background-color: #FFFFFF;
-    padding: 60px 0;
-}
-
+/* --- Features (Grid) --- */
 .feature-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    margin-top: 40px;
 }
 
 .feature-item {
-    text-align: center;
-    padding: 20px;
+    background: var(--color-background);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .feature-item h3 {
-    color: var(--color-secondary);
-    margin-bottom: 10px;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
 }
 
-/* Rodapé (Footer) */
-.footer {
-    background-color: var(--color-primary);
-    color: var(--color-text-light);
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 40px;
-}
-
-/* --- MELHORIA: Componentes Interativos --- */
-
-/* Acordeão/Sanfona */
-.accordion {
-    margin-bottom: 1em;
-}
-
+/* --- Componentes Interativos (Acordeão e Revelar) --- */
 .accordion-header {
-    display: flex; /* Permite alinhar o título e o ícone */
-    justify-content: space-between; /* Coloca o título na esquerda e o ícone na direita */
-    align-items: center; /* Centraliza verticalmente */
-    background-color: var(--color-secondary);
-    color: var(--color-text-light);
-    padding: 15px;
+    background: var(--color-surface);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 12px;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    margin-bottom: 5px; /* Espaço entre cabeçalhos fechados */
 }
 
 .accordion-header:hover {
-    background-color: #A0522D; /* Marrom um pouco mais escuro */
+    border-color: var(--color-accent-start);
 }
 
-/* Ícone de status para o acordeão (será adicionado ao HTML depois) */
-.accordion-icon::before {
-    content: '+'; /* Ícone de "fechado" */
-    font-size: 1.5em;
-    font-weight: bold;
+.accordion-header.active {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: var(--color-accent-start);
 }
-.accordion-header.active .accordion-icon::before {
-    content: '−'; /* Ícone de "aberto" */
+
+/* Ícone do Acordeão (Chevron animado) */
+.accordion-icon {
+    transition: transform 0.3s ease;
+}
+.accordion-icon::before {
+    content: '▼'; /* Chevron para baixo */
+    font-size: 1rem;
+    color: var(--color-secondary);
+}
+.accordion-header.active .accordion-icon {
+    transform: rotate(180deg);
 }
 
 .accordion-content {
     display: none;
-    padding: 25px; /* Mais "respiro" interno */
-    border: 1px solid #EAE0C8; /* Cor da borda mais suave */
+    padding: 30px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--border-color);
     border-top: none;
-    border-radius: 0 0 8px 8px;
-    background-color: #FCFBF5; /* Cor de fundo um pouco diferente do corpo */
-}
-
-/* Melhoria na legibilidade dos parágrafos do conteúdo */
-.accordion-content p {
-    color: var(--color-text-dark);
-    font-size: 1.1em;
-    line-height: 1.7;
-    margin-bottom: 1.5em;
+    border-radius: 0 0 12px 12px;
 }
 
 /* Clique para Revelar */
 .reveal-toggle {
-    color: var(--color-accent);
+    font-weight: 600;
     cursor: pointer;
-    text-decoration: underline;
-    font-weight: bold;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .reveal-content {
     display: none;
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-left: 3px solid var(--color-accent);
+    margin-top: 15px;
+    padding: 20px;
+    background-color: var(--color-background);
+    border-radius: 8px;
+    border-left: 4px solid var(--color-accent-end);
+}
+
+/* --- Rodapé --- */
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 40px;
+    color: var(--color-secondary);
+    border-top: 1px solid var(--border-color);
 }
