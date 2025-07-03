@@ -431,7 +431,7 @@ section {
 }
 .flip-card-back {
     background-image: var(--gradient-accent);
-    color: var(--color-primary);
+    color: #000000; /* Alterado para preto para máximo contraste */
     transform: rotateY(180deg);
 }
 
