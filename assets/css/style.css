@@ -73,34 +73,26 @@ section h3 {
     margin-top: 25px;
 }
 
-section p {
-    margin-bottom: 1em;
-}
-
-section ul {
-    list-style-type: disc;
-    margin-left: 20px;
-    margin-bottom: 1em;
-}
-
-section ul li {
-    margin-bottom: 0.5em;
-}
-
-/* Botões */
+/* --- MELHORIA: Botões com mais destaque --- */
 .btn {
     display: inline-block;
     background-color: var(--color-accent);
     color: var(--color-text-light);
-    padding: 12px 25px;
-    border-radius: 5px;
+    padding: 15px 30px; /* Um pouco maior para mais destaque */
+    border-radius: 8px; /* Bordas mais arredondadas são mais amigáveis */
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    font-family: 'Merriweather', serif; /* Consistência com a fonte do corpo */
+    text-transform: uppercase; /* Deixa o texto mais formal e com cara de botão */
+    letter-spacing: 1px; /* Leve espaçamento entre as letras */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidade */
+    transition: all 0.2s ease-in-out; /* Transição para todas as propriedades */
 }
 
 .btn:hover {
     background-color: #DAA520; /* Um dourado um pouco mais escuro no hover */
+    transform: translateY(-2px); /* Efeito de "levantar" ao passar o mouse */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra mais forte no hover */
 }
 
 /* Hero Section para a landing page */
@@ -119,7 +111,7 @@ section ul li {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Overlay escuro para melhor legibilidade do texto */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
@@ -137,9 +129,6 @@ section ul li {
     font-size: 1.5em;
     margin-bottom: 30px;
 }
-
-/* Seção 
-
 
 /* Seção 'Sobre' */
 .about {
@@ -179,7 +168,7 @@ section ul li {
     margin-top: 40px;
 }
 
-/* Componentes Interativos */
+/* --- MELHORIA: Componentes Interativos --- */
 
 /* Acordeão/Sanfona */
 .accordion {
@@ -187,6 +176,9 @@ section ul li {
 }
 
 .accordion-header {
+    display: flex; /* Permite alinhar o título e o ícone */
+    justify-content: space-between; /* Coloca o título na esquerda e o ícone na direita */
+    align-items: center; /* Centraliza verticalmente */
     background-color: var(--color-secondary);
     color: var(--color-text-light);
     padding: 15px;
@@ -199,12 +191,31 @@ section ul li {
     background-color: #A0522D; /* Marrom um pouco mais escuro */
 }
 
+/* Ícone de status para o acordeão (será adicionado ao HTML depois) */
+.accordion-icon::before {
+    content: '+'; /* Ícone de "fechado" */
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.accordion-header.active .accordion-icon::before {
+    content: '−'; /* Ícone de "aberto" */
+}
+
 .accordion-content {
     display: none;
-    padding: 15px;
-    border: 1px solid #ddd;
+    padding: 25px; /* Mais "respiro" interno */
+    border: 1px solid #EAE0C8; /* Cor da borda mais suave */
     border-top: none;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 8px 8px;
+    background-color: #FCFBF5; /* Cor de fundo um pouco diferente do corpo */
+}
+
+/* Melhoria na legibilidade dos parágrafos do conteúdo */
+.accordion-content p {
+    color: var(--color-text-dark);
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 1.5em;
 }
 
 /* Clique para Revelar */
@@ -222,5 +233,3 @@ section ul li {
     background-color: #f9f9f9;
     border-left: 3px solid var(--color-accent);
 }
-
-
