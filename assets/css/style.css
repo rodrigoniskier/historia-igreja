@@ -678,7 +678,7 @@ section {
 /* --- Seção de Destaques ("Features") --- */
 .home-section {
     padding: 80px 0;
-    /* Animação de entrada */
+   /* Adicionando o estado inicial da animação aqui */
     opacity: 0;
     transform: translateY(50px);
     transition: all 0.8s ease-out;
