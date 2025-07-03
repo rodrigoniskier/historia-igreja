@@ -106,8 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.querySelector('.world-column')) {
         const columns = document.querySelectorAll(".world-column");
         }
-        ;
-    }
 });
 // Implementação do "Clique para Revelar"
 document.addEventListener("DOMContentLoaded", () => {
