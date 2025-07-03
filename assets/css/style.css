@@ -198,3 +198,117 @@ section {
     color: var(--color-secondary);
     border-top: 1px solid var(--border-color);
 }
+/* =================================================================
+   ESTILOS ADICIONAIS PARA NAVEGAÇÃO DO CURSO
+   ================================================================= */
+
+/* --- Layout Principal do Curso (Sidebar + Conteúdo) --- */
+.course-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- Barra Lateral de Navegação (Sidebar) --- */
+#sidebar-nav {
+    width: 280px;
+    flex-shrink: 0; /* Impede que a sidebar encolha */
+    background-color: var(--color-background); /* Um pouco diferente da superfície para destacar */
+    padding: 40px 20px;
+    border-right: 1px solid var(--border-color);
+}
+
+#sidebar-nav h3 {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+#sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar-nav li a {
+    display: block;
+    color: var(--color-secondary);
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+}
+
+#sidebar-nav li a:hover {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+}
+
+/* Estilo para o módulo ATIVO no menu */
+#sidebar-nav li a.active-module {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    font-weight: 600;
+    border-left-color: var(--color-accent-start);
+}
+
+/* --- Conteúdo Principal (à direita da sidebar) --- */
+#main-content {
+    flex-grow: 1; /* Faz o conteúdo ocupar todo o espaço restante */
+    padding: 20px;
+    /* Adicionamos overflow-x para o caso de algum conteúdo estourar a tela */
+    overflow-x: hidden; 
+}
+
+/* --- Navegação Inferior (Anterior / Início / Seguinte) --- */
+.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Estilo para botões desativados */
+.btn.disabled {
+    background: var(--color-surface);
+    color: var(--color-secondary);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+.btn.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- Design Responsivo para Telas Menores --- */
+@media (max-width: 1024px) {
+    .course-layout {
+        flex-direction: column;
+    }
+
+    #sidebar-nav {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        min-height: auto;
+    }
+
+    .bottom-nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
