@@ -62,7 +62,35 @@ function setupWisdomCarousel() {
     // Mostra o primeiro slide
     if(slides.length > 0) showSlide(slideIndex);
 }
+// =================================================================
+// NOVA FUNÇÃO UNIVERSAL DE ANIMAÇÃO DE SCROLL
+// =================================================================
+function setupUniversalScrollReveal() {
+    // Seleciona TODOS os elementos que devem ser animados ao rolar
+    const elementsToReveal = document.querySelectorAll('.timeline-container, .world-column, .home-section');
 
+    // Opções para o Intersection Observer
+    const observerOptions = {
+        root: null, // Observa em relação à viewport
+        threshold: 0.1, // Ativa quando 10% do elemento está visível
+    };
+
+    // A função que será chamada quando um elemento entra na tela
+    const revealElement = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Adiciona a classe .visible para ativar a animação do CSS
+                entry.target.classList.add('visible');
+                // Para de observar o elemento para não animar de novo
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    // Cria e ativa o observador
+    const observer = new IntersectionObserver(revealElement, observerOptions);
+    elementsToReveal.forEach(el => observer.observe(el));
+}
 // Dentro de "DOMContentLoaded", adicione as chamadas para as novas funções
 document.addEventListener("DOMContentLoaded", () => {
     // ... seu código existente ...
@@ -77,16 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Reutilizando a função de scroll para as colunas
     if (document.querySelector('.world-column')) {
         const columns = document.querySelectorAll(".world-column");
-        function revealColumns() {
-             const windowHeight = window.innerHeight;
-             columns.forEach(col => {
-                if (col.getBoundingClientRect().top < windowHeight - 100) {
-                    col.classList.add("visible");
-                }
-             });
         }
-        revealColumns();
-        window.addEventListener("scroll", revealColumns);
+        ;
     }
 });
 // Implementação do "Clique para Revelar"
@@ -123,19 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-// --- LÓGICA PARA ANIMAÇÃO DE SCROLL (TIMELINE) ---
-function revealOnScroll() {
-    const timelineContainers = document.querySelectorAll(".timeline-container");
-    const windowHeight = window.innerHeight;
 
-    timelineContainers.forEach(container => {
-        const elementTop = container.getBoundingClientRect().top;
-        // Revela o elemento um pouco antes de ele atingir o meio da tela
-        if (elementTop < windowHeight - 150) {
-            container.classList.add("visible");
-        }
-    });
-}
 
 // --- LÓGICA PARA O QUIZ RÁPIDO ---
 function setupQuiz() {
@@ -180,29 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.querySelector('.quiz-container')) {
         setupQuiz();
     }
-// --- LÓGICA GENÉRICA PARA REVELAR SEÇÕES AO ROLAR ---
-function setupScrollReveal() {
-    const sectionsToReveal = document.querySelectorAll(".home-section");
-
-    const revealSection = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target); // Para a animação não repetir
-            }
-        });
-    };
-
-    const sectionObserver = new IntersectionObserver(revealSection, {
-        root: null,
-        threshold: 0.15,
-    });
-
-    sectionsToReveal.forEach(section => {
-        sectionObserver.observe(section);
-    });
-}
-
 
 // Dentro de "DOMContentLoaded", adicione a chamada para a nova função
 document.addEventListener("DOMContentLoaded", () => {
