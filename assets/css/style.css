@@ -938,3 +938,71 @@ section {
     background-clip: text;
     color: transparent;
 }
+/* =================================================================
+   ESTILOS ADICIONAIS PARA MÓDULO 3 (VERSÃO APROFUNDADA)
+   ================================================================= */
+
+/* --- Layout de Duas Colunas --- */
+.two-worlds-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+.world-column h2 {
+    border-image: var(--gradient-accent) 1;
+    border-width: 0 0 3px 0;
+    border-style: solid;
+    padding-bottom: 10px;
+}
+/* Em telas menores, as colunas ficam uma sobre a outra */
+@media (max-width: 1024px) {
+    .two-worlds-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Interatividade da Visão de Constantino --- */
+.vision-interactive {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+}
+.vision-icon {
+    font-size: 3rem;
+    color: var(--color-accent-start);
+}
+.vision-interactive .tooltip-vision {
+    visibility: hidden;
+    width: 220px;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -110px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border: 1px solid var(--border-color);
+}
+.vision-interactive:hover .tooltip-vision {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* --- Galeria dos Padres da Igreja --- */
+.church-fathers-gallery {
+    margin-top: 30px;
+}
+.father-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
