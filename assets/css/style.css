@@ -477,7 +477,7 @@ section {
 /* --- Layout de Dois Mundos --- */
 .two-worlds-layout {
     display: flex;
-    gap: 40px;
+    gap: 20px;
 }
 .world-column {
     flex: 1;
