@@ -841,3 +841,100 @@ section {
 .drop-zone { background-color: var(--color-background); padding: 20px; border-radius: 8px; border: 2px dashed var(--border-color); text-align: center; transition: all 0.3s ease;}
 .drop-zone.hovered { border-color: var(--color-accent-end); background-color: var(--color-surface); }
 .drop-zone.correct { border-style: solid; border-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
+
+/* =================================================================
+   ESTILOS ADICIONAIS PARA MÓDULO 2 (VERSÃO APROFUNDADA)
+   ================================================================= */
+
+/* --- Conteúdo Expansível (Leia Mais) --- */
+.detailed-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-out;
+    border-top: 1px solid var(--border-color);
+    margin-top: 15px;
+    padding-top: 15px;
+}
+.read-more-btn {
+    background: none;
+    border: 1px solid var(--color-secondary);
+    color: var(--color-secondary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+.read-more-btn:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-surface);
+}
+
+/* --- Mapa Interativo --- */
+.map-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+}
+.map-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+.map-hotspot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-accent-start);
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+.map-hotspot .tooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border: 1px solid var(--border-color);
+}
+.map-hotspot:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(30, 144, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(30, 144, 255, 0); }
+}
+
+/* --- Galeria de Apologistas --- */
+.apologists-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+.apologist-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+.apologist-card h4 {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
