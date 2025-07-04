@@ -474,16 +474,19 @@ section {
    ESTILOS ADICIONAIS PARA MÓDULO 3 INTERATIVO
    ================================================================= */
 
-/* --- Layout de Dois Mundos --- */
+/* --- CORREÇÃO DEFINITIVA DO LAYOUT DO MÓDULO 3 --- */
+
+/* 1. O Contêiner agora usa Flexbox */
 .two-worlds-layout {
-    display: flex;
-    gap: 20px;
-   background-color: red;
+    display: flex; /* Mudamos de 'grid' para 'flex' */
+    gap: 20px;     /* Mantemos o espaçamento mínimo entre as colunas */
 }
+
+/* 2. As Colunas agora são instruídas a crescer */
 .world-column {
-    flex: 1;
-    width: 50%;
-    /* Para as animações de scroll */
+    flex: 1; /* Esta linha mágica diz para cada coluna: "cresça e ocupe o espaço disponível igualmente" */
+    
+    /* Mantemos as animações que já funcionam */
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease-out;
