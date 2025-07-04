@@ -291,4 +291,31 @@ document.addEventListener("DOMContentLoaded", () => {
     setupSchismAnimation();
     setupScholasticChallenge();
 });
+    /**
+ * Configura os botões "Leia Mais" para expandir conteúdo.
+ */
+function setupReadMore() {
+    const readMoreBtns = document.querySelectorAll('.read-more-btn');
+
+    readMoreBtns.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            const content = event.target.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                btn.textContent = "Leia Mais";
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                btn.textContent = "Mostrar Menos";
+            }
+        });
+    });
+}
+
+// Dentro do seu addEventListener "DOMContentLoaded", adicione a chamada:
+document.addEventListener("DOMContentLoaded", () => {
+    // ... seu código existente ...
+    
+    // --- CHAMADA PARA O NOVO MÓDULO 2 ---
+    setupReadMore();
+});
 }); // Fim do addEventListener
