@@ -186,5 +186,109 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.querySelector(".wisdom-carousel")) {
         setupWisdomCarousel();
     }
+// =================================================================
+// FUNÇÕES PARA O MÓDULO 4 (VITRAL)
+// =================================================================
 
+/**
+ * Configura a interatividade dos painéis do vitral.
+ */
+function setupStainedGlass() {
+    const panels = document.querySelectorAll('.glass-panel');
+    const overlay = document.querySelector('.panel-content-overlay');
+    const contentContainer = document.querySelector('.panel-content-inner');
+    
+    if (!overlay) return;
+
+    panels.forEach(panel => {
+        panel.addEventListener('click', () => {
+            const topic = panel.dataset.topic;
+            const sourceContent = document.querySelector(`#content-${topic}`);
+            if (sourceContent) {
+                contentContainer.innerHTML = sourceContent.innerHTML;
+                // Adiciona o botão de fechar ao conteúdo
+                contentContainer.innerHTML += '<span class="close-button" onclick="closePanelOverlay()">&times;</span>';
+                overlay.style.display = 'block';
+            }
+        });
+    });
+}
+
+// Função global para fechar o overlay (para ser chamada pelo botão)
+function closePanelOverlay() {
+    const overlay = document.querySelector('.panel-content-overlay');
+    if (overlay) overlay.style.display = 'none';
+}
+
+
+/**
+ * Configura a animação da rachadura do Grande Cisma.
+ */
+function setupSchismAnimation() {
+    const crack = document.querySelector('.schism-crack');
+    if (!crack) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            crack.classList.add('visible');
+            observer.unobserve(crack);
+        }
+    }, { threshold: 0.8 });
+
+    observer.observe(crack.parentElement);
+}
+
+/**
+ * Configura o desafio de arrastar e soltar da Escolástica.
+ */
+function setupScholasticChallenge() {
+    const draggables = document.querySelectorAll('.draggable-item');
+    const dropZones = document.querySelectorAll('.drop-zone');
+    if (draggables.length === 0) return;
+
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('dragging');
+        });
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging');
+        });
+    });
+
+    dropZones.forEach(zone => {
+        zone.addEventListener('dragover', e => {
+            e.preventDefault();
+            zone.classList.add('hovered');
+        });
+        zone.addEventListener('dragleave', () => {
+            zone.classList.remove('hovered');
+        });
+        zone.addEventListener('drop', e => {
+            e.preventDefault();
+            zone.classList.remove('hovered');
+            const draggable = document.querySelector('.dragging');
+            const draggableId = draggable.dataset.thinker;
+            const zoneId = zone.dataset.idea;
+
+            if (draggableId === zoneId) {
+                zone.innerHTML = ''; // Limpa a zona
+                zone.appendChild(draggable);
+                zone.classList.add('correct');
+                draggable.setAttribute('draggable', 'false');
+                draggable.style.cursor = 'default';
+            }
+        });
+    });
+}
+
+
+// Dentro de "DOMContentLoaded", adicione as chamadas para as novas funções
+document.addEventListener("DOMContentLoaded", () => {
+    // ... seu código existente ...
+
+    // --- CHAMADAS PARA O MÓDULO 4 ---
+    setupStainedGlass();
+    setupSchismAnimation();
+    setupScholasticChallenge();
+});
 }); // Fim do addEventListener
