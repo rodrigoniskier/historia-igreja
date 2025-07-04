@@ -727,3 +727,117 @@ section {
         transform: translateY(-10px);
     }
 }
+/* =================================================================
+   ESTILOS ADICIONAIS PARA MÓDULO 4 INTERATIVO (VITRAL)
+   ================================================================= */
+
+/* --- Layout do Vitral --- */
+.stained-glass-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+    padding: 20px;
+    background-color: var(--color-background);
+    border: 8px solid #2c2c2c;
+    border-radius: 4px;
+    position: relative;
+}
+
+.glass-panel {
+    background-color: var(--color-surface);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.glass-panel:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent-end);
+    box-shadow: 0 10px 20px rgba(0, 191, 255, 0.1);
+}
+
+.glass-panel:hover::before {
+    opacity: 1;
+}
+
+.panel-icon {
+    font-size: 3rem;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
+}
+
+/* --- Sobreposição de Conteúdo (Modal) --- */
+.panel-content-overlay {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 17, 23, 0.85);
+    animation: fadeIn 0.4s;
+    overflow-y: auto;
+}
+
+.panel-content-inner {
+    background-color: var(--color-surface);
+    margin: 10% auto;
+    padding: 40px;
+    border: 1px solid var(--border-color);
+    width: 90%;
+    max-width: 700px;
+    border-radius: 12px;
+    position: relative;
+}
+
+/* --- Animação da Rachadura (Grande Cisma) --- */
+.schism-container {
+    grid-column: 1 / -1; /* Ocupa as duas colunas */
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+.schism-crack {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    width: 4px;
+    height: 0; /* Começa com altura 0 */
+    background-color: var(--color-accent-start);
+    box-shadow: 0 0 10px var(--color-accent-start);
+    transform: translateX(-50%);
+    transition: height 1.5s ease-out;
+}
+
+.schism-crack.visible {
+    height: calc(100% + 40px); /* Anima a altura */
+}
+
+/* --- Desafio da Escolástica (Drag & Drop) --- */
+.scholastic-challenge { padding: 20px; border-top: 1px solid var(--border-color); margin-top: 20px; }
+.thinkers-container, .ideas-container { display: flex; justify-content: space-around; margin: 20px 0; }
+.draggable-item { background-color: var(--color-background); padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border-color); cursor: grab; }
+.drop-zone { background-color: var(--color-background); padding: 20px; border-radius: 8px; border: 2px dashed var(--border-color); text-align: center; transition: all 0.3s ease;}
+.drop-zone.hovered { border-color: var(--color-accent-end); background-color: var(--color-surface); }
+.drop-zone.correct { border-style: solid; border-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
