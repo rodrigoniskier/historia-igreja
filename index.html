@@ -3,56 +3,731 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>História da Igreja - Uma Jornada Interativa</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>História da Igreja Cristã - Tratado Acadêmico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .navigation {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-title {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .nav-item {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 1em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .section-content {
+            padding: 30px;
+        }
+
+        .section-content h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        .section-content h4 {
+            color: #34495e;
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        .section-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .section-content ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        .section-content li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .references {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .references h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .references p {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .timeline {
+            position: relative;
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-content {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>História da Igreja Cristã</h1>
+            <p class="subtitle">Um Tratado Acadêmico Abrangente</p>
+        </header>
 
-    <header class="hero-home" style="background: url('assets/images/hero-background.jpg') no-repeat center center/cover;">
-        <div class="hero-home-content">
-            <h1>Uma Jornada Através dos Séculos</h1>
-            <p>Descubra a fascinante e transformadora história da Igreja Cristã em um curso interativo e visualmente cativante.</p>
-            <a href="curso/modulo_01.html" class="btn">Iniciar a Jornada</a>
-        </div>
-        <div class="scroll-indicator">
-            <a href="#about">&#8595;</a>
-        </div>
-    </header>
-
-    <section id="about" class="home-section">
-        <div class="container">
-            <h2>Por Que Este Curso é Diferente?</h2>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <h3>Design Cativante</h3>
-                    <p>Cada módulo é uma experiência visual única, projetada para imergir você na história e facilitar o aprendizado.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Conteúdo Interativo</h3>
-                    <p>Vá além da leitura. Participe de quizzes, explore linhas do tempo e interaja com os eventos mais marcantes da fé.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Teologia Sólida</h3>
-                    <p>Um conteúdo cuidadosamente elaborado, com uma abordagem fiel às Escrituras e à teologia cristã reformada.</p>
-                </div>
+        <nav class="navigation">
+            <div class="nav-title">Navegação por Períodos Históricos</div>
+            <div class="nav-grid">
+                <a href="#" class="nav-item" onclick="showSection('introducao')">Introdução à História da Igreja</a>
+                <a href="#" class="nav-item" onclick="showSection('apostolico')">Período Apostólico</a>
+                <a href="#" class="nav-item" onclick="showSection('primitiva')">Igreja Primitiva (Séc. I-III)</a>
+                <a href="#" class="nav-item" onclick="showSection('consolidacao')">Consolidação da Igreja Antiga</a>
+                <a href="#" class="nav-item" onclick="showSection('medieval')">Igreja na Idade Média</a>
+                <a href="#" class="nav-item" onclick="showSection('reforma')">Reforma Protestante</a>
+                <a href="#" class="nav-item" onclick="showSection('moderna')">Era Moderna (Séc. XVII-XVIII)</a>
+                <a href="#" class="nav-item" onclick="showSection('seculo19')">Século XIX</a>
+                <a href="#" class="nav-item" onclick="showSection('contemporanea')">Igreja Contemporânea</a>
             </div>
-        </div>
-    </section>
+        </nav>
 
-    <section class="cta-section home-section">
-        <div class="container">
-            <h2>Sua Jornada Começa Agora.</h2>
-            <p style="color: var(--color-secondary); max-width: 600px; margin: 1rem auto 2rem;">Não perca a chance de aprofundar sua fé e conhecimento de uma forma que você nunca viu antes.</p>
-            <a href="curso/modulo_01.html" class="btn">Explorar o Primeiro Módulo</a>
-        </div>
-    </section>
+        <!-- Introdução -->
+        <section id="introducao" class="content-section active">
+            <div class="section-header">
+                <h2 class="section-title">Introdução à História da Igreja</h2>
+                <p class="section-subtitle">Conceito, Importância, Métodos, Fontes e Historiografia Cristã</p>
+            </div>
+            <div class="section-content">
+                <h3>O que é História da Igreja?</h3>
+                <p>A História da Igreja, também conhecida como História Eclesiástica, é o estudo acadêmico do desenvolvimento, expansão e transformação da Igreja Cristã ao longo dos séculos. Esta disciplina examina não apenas os eventos e personalidades que moldaram a fé cristã, mas também as interações complexas entre a Igreja e as sociedades em que ela se desenvolveu.</p>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Rodrigo Niskier. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+                <h3>Importância do Estudo</h3>
+                <p>O estudo da História da Igreja é fundamental para compreender:</p>
+                <ul>
+                    <li>O desenvolvimento das doutrinas e práticas cristãs</li>
+                    <li>A influência do cristianismo na civilização ocidental</li>
+                    <li>Os desafios e adaptações da Igreja ao longo do tempo</li>
+                    <li>As raízes históricas das diferentes denominações cristãs</li>
+                </ul>
 
-    <script src="assets/js/interactive.js"></script>
+                <h3>Métodos e Fontes</h3>
+                <p>Os historiadores da Igreja utilizam uma variedade de fontes primárias e secundárias, incluindo documentos eclesiásticos, atas de concílios, escritos dos Pais da Igreja, arqueologia, arte sacra e literatura contemporânea. A metodologia histórica crítica é aplicada para analisar essas fontes de forma objetiva e contextualizada.</p>
+
+                <h3>Historiografia Cristã</h3>
+                <p>A historiografia cristã tem suas raízes nos próprios textos bíblicos, particularmente no livro de Atos dos Apóstolos. Ao longo dos séculos, historiadores como Eusébio de Cesareia, considerado o "pai da história eclesiástica", estabeleceram as bases para o estudo sistemático da história da Igreja.</p>
+            </div>
+        </section>
+
+        <!-- Período Apostólico -->
+        <section id="apostolico" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">A Igreja no Período Apostólico</h2>
+                <p class="section-subtitle">Pentecostes e a Expansão Inicial (30-100 d.C.)</p>
+            </div>
+            <div class="section-content">
+                <h3>Pentecostes: O Nascimento da Igreja</h3>
+                <p>O evento de Pentecostes, descrito em Atos 2, marca tradicionalmente o nascimento da Igreja Cristã. Neste dia, os apóstolos receberam o Espírito Santo e começaram a pregar o evangelho, resultando na conversão de cerca de três mil pessoas.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">30 d.C.</div>
+                        <p>Crucificação e Ressurreição de Jesus Cristo</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">30 d.C. (Pentecostes)</div>
+                        <p>Descida do Espírito Santo e nascimento da Igreja</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">34-36 d.C.</div>
+                        <p>Conversão de Paulo de Tarso</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">49 d.C.</div>
+                        <p>Concílio de Jerusalém</p>
+                    </div>
+                </div>
+
+                <h3>A Comunidade de Jerusalém</h3>
+                <p>A primeira comunidade cristã em Jerusalém era caracterizada pela comunhão fraternal, partilha de bens, oração e ensino apostólico. Esta comunidade primitiva estabeleceu muitos dos padrões que influenciariam o desenvolvimento posterior da Igreja.</p>
+
+                <h3>As Missões Paulinas</h3>
+                <p>O apóstolo Paulo realizou três grandes viagens missionárias que foram fundamentais para a expansão do cristianismo além das fronteiras judaicas. Suas cartas às igrejas que fundou constituem uma parte significativa do Novo Testamento e fornecem insights valiosos sobre a vida e os desafios das primeiras comunidades cristãs.</p>
+
+                <h4>Características das Primeiras Comunidades:</h4>
+                <ul>
+                    <li>Organização simples com liderança apostólica</li>
+                    <li>Ênfase na comunhão e partilha</li>
+                    <li>Celebração da Ceia do Senhor</li>
+                    <li>Evangelização ativa</li>
+                    <li>Expectativa escatológica</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Igreja Primitiva -->
+        <section id="primitiva" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">A Igreja Primitiva (Séculos I-III)</h2>
+                <p class="section-subtitle">Perseguições, Mártires e Desenvolvimento Doutrinário</p>
+            </div>
+            <div class="section-content">
+                <h3>Perseguições Romanas</h3>
+                <p>A Igreja primitiva enfrentou períodos intensos de perseguição sob vários imperadores romanos. Estas perseguições, embora intermitentes, testaram a fé dos cristãos e contribuíram para o fortalecimento da identidade cristã.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">64 d.C.</div>
+                        <p>Perseguição de Nero após o incêndio de Roma</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">81-96 d.C.</div>
+                        <p>Perseguição sob Domiciano</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">249-251 d.C.</div>
+                        <p>Perseguição sistemática de Décio</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">303-311 d.C.</div>
+                        <p>Grande Perseguição de Diocleciano</p>
+                    </div>
+                </div>
+
+                <h3>Os Mártires</h3>
+                <p>O martírio tornou-se um testemunho poderoso da fé cristã. Figuras como Estêvão (o primeiro mártir), Policarpo de Esmirna e Perpétua e Felicidade inspiraram gerações de cristãos com sua coragem e dedicação.</p>
+
+                <h3>Desenvolvimento Doutrinário</h3>
+                <p>Durante este período, a Igreja desenvolveu suas doutrinas fundamentais em resposta a desafios internos e externos:</p>
+                <ul>
+                    <li><strong>Cânon Bíblico:</strong> Processo gradual de reconhecimento dos livros do Novo Testamento</li>
+                    <li><strong>Sucessão Apostólica:</strong> Desenvolvimento da autoridade episcopal</li>
+                    <li><strong>Credos:</strong> Formulação de declarações de fé para combater heresias</li>
+                </ul>
+
+                <h3>Apologistas e Pais Apostólicos</h3>
+                <p>Os Pais Apostólicos (como Clemente de Roma e Inácio de Antioquia) e os Apologistas (como Justino Mártir e Tertuliano) defenderam a fé cristã contra ataques externos e desenvolveram a teologia cristã primitiva.</p>
+
+                <h3>Heresias e Respostas da Igreja</h3>
+                <p>A Igreja enfrentou várias heresias que ameaçavam a ortodoxia cristã:</p>
+                <ul>
+                    <li><strong>Gnosticismo:</strong> Negava a realidade da encarnação</li>
+                    <li><strong>Marcionismo:</strong> Rejeitava o Antigo Testamento</li>
+                    <li><strong>Montanismo:</strong> Enfatizava revelações proféticas contínuas</li>
+                    <li><strong>Modalismo:</strong> Negava a distinção das pessoas da Trindade</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Consolidação da Igreja Antiga -->
+        <section id="consolidacao" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Consolidação da Igreja Antiga</h2>
+                <p class="section-subtitle">Concílios Ecumênicos e o Edito de Milão</p>
+            </div>
+            <div class="section-content">
+                <h3>Constantino e o Edito de Milão (313 d.C.)</h3>
+                <p>O imperador Constantino promulgou o Edito de Milão em 313 d.C., concedendo tolerância religiosa ao cristianismo e marcando o fim das perseguições sistemáticas. Este evento transformou radicalmente a posição da Igreja no Império Romano.</p>
+
+                <h3>Os Primeiros Concílios Ecumênicos</h3>
+                <p>Os concílios ecumênicos foram assembleias de bispos de toda a Igreja que se reuniram para resolver questões doutrinárias e disciplinares importantes:</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">325 d.C.</div>
+                        <p><strong>Concílio de Niceia I:</strong> Condenou o arianismo e formulou o Credo Niceno</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">381 d.C.</div>
+                        <p><strong>Concílio de Constantinopla I:</strong> Reafirmou a divindade do Espírito Santo</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">431 d.C.</div>
+                        <p><strong>Concílio de Éfeso:</strong> Condenou o nestorianismo</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">451 d.C.</div>
+                        <p><strong>Concílio de Calcedônia:</strong> Definiu a doutrina das duas naturezas de Cristo</p>
+                    </div>
+                </div>
+
+                <h3>Consequências da Aliança Igreja-Estado</h3>
+                <p>A aliança entre a Igreja e o Estado trouxe benefícios e desafios:</p>
+                <ul>
+                    <li><strong>Benefícios:</strong> Fim das perseguições, recursos para construção de igrejas, expansão missionária</li>
+                    <li><strong>Desafios:</strong> Interferência imperial em assuntos eclesiásticos, cristianização superficial, perda da pureza apostólica</li>
+                </ul>
+
+                <h3>Desenvolvimento da Estrutura Eclesiástica</h3>
+                <p>Durante este período, a Igreja desenvolveu uma estrutura hierárquica mais complexa, com a emergência dos patriarcados (Roma, Constantinopla, Alexandria, Antioquia e Jerusalém) e o fortalecimento da autoridade episcopal.</p>
+            </div>
+        </section>
+
+        <!-- Igreja Medieval -->
+        <section id="medieval" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">A Igreja na Idade Média</h2>
+                <p class="section-subtitle">Monasticismo, Escolástica e Poder Papal (Séculos IV-XV)</p>
+            </div>
+            <div class="section-content">
+                <h3>Queda de Roma e Ascensão do Papado</h3>
+                <p>Com a queda do Império Romano do Ocidente em 476 d.C., a Igreja, especialmente o Papado, assumiu um papel de liderança política e cultural na Europa. O Papa tornou-se não apenas um líder espiritual, mas também uma figura política de grande influência.</p>
+
+                <h3>Cristianização da Europa</h3>
+                <p>A Idade Média foi um período de intensa cristianização da Europa, com a fé cristã se espalhando para regiões que antes eram pagãs. Monges e missionários desempenharam um papel crucial, estabelecendo mosteiros que serviam como centros de aprendizado, cultura e evangelização.</p>
+
+                <h3>Monasticismo: Origens, Ordens e Influência</h3>
+                <p>O monasticismo foi um movimento de profunda importância na Idade Média:</p>
+                <ul>
+                    <li><strong>Beneditinos:</strong> Fundada por São Bento, foi a ordem mais influente na Alta Idade Média</li>
+                    <li><strong>Cluniacenses:</strong> Reforma do monasticismo beneditino no século X</li>
+                    <li><strong>Cistercienses:</strong> Retorno à simplicidade da Regra Beneditina original</li>
+                    <li><strong>Ordens Mendicantes:</strong> Franciscanos e Dominicanos no século XIII</li>
+                </ul>
+
+                <h3>Escolástica e Teologia Medieval</h3>
+                <p>A Escolástica foi o método filosófico e teológico dominante nas universidades medievais, buscando conciliar a fé cristã com a razão, especialmente a filosofia de Aristóteles. Principais figuras incluem:</p>
+                <ul>
+                    <li><strong>Anselmo de Cantuária:</strong> "Pai da Escolástica"</li>
+                    <li><strong>Tomás de Aquino:</strong> Síntese entre aristotelismo e cristianismo</li>
+                    <li><strong>João Duns Escoto:</strong> Ênfase na vontade de Deus</li>
+                </ul>
+
+                <h3>Cismas: Oriental (1054) e Ocidental</h3>
+                <p>A Igreja medieval foi marcada por duas grandes divisões:</p>
+                <ul>
+                    <li><strong>Cisma do Oriente (1054):</strong> Separação entre Igreja Católica Romana e Igreja Ortodoxa</li>
+                    <li><strong>Cisma do Ocidente (1378-1417):</strong> Período com dois ou três papas simultâneos</li>
+                </ul>
+
+                <h3>Cruzadas e Inquisição</h3>
+                <p>Dois fenômenos controversos marcaram a Igreja medieval:</p>
+                <ul>
+                    <li><strong>Cruzadas (1095-1291):</strong> Expedições militares para retomar a Terra Santa</li>
+                    <li><strong>Inquisição (século XIII):</strong> Tribunal eclesiástico para combater heresias</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Reforma Protestante -->
+        <section id="reforma" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">A Reforma Protestante (Século XVI)</h2>
+                <p class="section-subtitle">Causas, Figuras-Chave e Principais Ramos</p>
+            </div>
+            <div class="section-content">
+                <h3>Causas da Reforma</h3>
+                <p>A Reforma Protestante foi impulsionada por uma série de fatores:</p>
+                <ul>
+                    <li><strong>Corrupção da Igreja:</strong> Venda de indulgências, simonia e nicolaísmo</li>
+                    <li><strong>Questões Teológicas:</strong> Questionamento da doutrina católica sobre salvação</li>
+                    <li><strong>Fatores Políticos:</strong> Desejo de independência da autoridade papal</li>
+                    <li><strong>Invenção da Imprensa:</strong> Facilitou a disseminação das ideias reformistas</li>
+                </ul>
+
+                <h3>Martinho Lutero e o Luteranismo</h3>
+                <p>Martinho Lutero, monge agostiniano alemão, iniciou a Reforma em 1517 com suas 95 Teses. Sua teologia enfatizava:</p>
+                <ul>
+                    <li>Justificação pela fé somente (<em>sola fide</em>)</li>
+                    <li>Autoridade da Escritura somente (<em>sola scriptura</em>)</li>
+                    <li>Sacerdócio de todos os crentes</li>
+                </ul>
+
+                <h3>João Calvino e o Calvinismo</h3>
+                <p>João Calvino desenvolveu uma teologia sistemática em Genebra, enfatizando:</p>
+                <ul>
+                    <li>Soberania de Deus</li>
+                    <li>Predestinação</li>
+                    <li>Disciplina moral rigorosa</li>
+                </ul>
+
+                <h3>Henrique VIII e o Anglicanismo</h3>
+                <p>A Reforma na Inglaterra teve motivações políticas, com Henrique VIII rompendo com Roma em 1534. O Anglicanismo manteve características católicas na liturgia, mas adotou princípios protestantes na doutrina.</p>
+
+                <h3>Consequências da Reforma</h3>
+                <ul>
+                    <li>Divisão da cristandade ocidental</li>
+                    <li>Guerras religiosas</li>
+                    <li>Contrarreforma Católica</li>
+                    <li>Desenvolvimento do nacionalismo</li>
+                    <li>Impacto cultural e social</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Era Moderna -->
+        <section id="moderna" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">A Igreja na Era Moderna (Séculos XVII-XVIII)</h2>
+                <p class="section-subtitle">Guerras Religiosas, Iluminismo e Avivamentos</p>
+            </div>
+            <div class="section-content">
+                <h3>Guerras Religiosas</h3>
+                <p>Após a Reforma Protestante, a Europa foi palco de guerras religiosas devastadoras, incluindo a Guerra dos Trinta Anos (1618-1648). O Tratado de Vestfália estabeleceu o princípio <em>cuius regio, eius religio</em>.</p>
+
+                <h3>Iluminismo e Secularização</h3>
+                <p>O século XVIII foi marcado pelo Iluminismo, que desafiou a autoridade tradicional da Igreja:</p>
+                <ul>
+                    <li>Ênfase na razão e ciência</li>
+                    <li>Crítica aos dogmas religiosos</li>
+                    <li>Promoção da tolerância religiosa</li>
+                    <li>Separação entre Igreja e Estado</li>
+                </ul>
+
+                <h3>Pietismo e Avivamentos</h3>
+                <p>Em contraste com o racionalismo iluminista, surgiram movimentos de renovação espiritual:</p>
+                <ul>
+                    <li><strong>Pietismo (Alemanha):</strong> Ênfase na experiência pessoal da fé</li>
+                    <li><strong>Metodismo (Inglaterra):</strong> Movimento de avivamento liderado por John Wesley</li>
+                    <li><strong>Grande Despertar (América):</strong> Avivamento nas colônias americanas</li>
+                </ul>
+
+                <h3>Missões Protestantes e Católicas</h3>
+                <p>A Era Moderna foi um período de intensa atividade missionária. A Igreja Católica continuou seus esforços através dos Jesuítas, enquanto os protestantes começaram a desenvolver um movimento missionário mais organizado.</p>
+            </div>
+        </section>
+
+        <!-- Século XIX -->
+        <section id="seculo19" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">A Igreja no Século XIX</h2>
+                <p class="section-subtitle">Avivamentos, Missões Globais e Abolicionismo</p>
+            </div>
+            <div class="section-content">
+                <h3>Segundo Grande Despertar</h3>
+                <p>Nos Estados Unidos, o Segundo Grande Despertar (1790-1840) foi um movimento de avivamento que:</p>
+                <ul>
+                    <li>Aumentou significativamente o número de membros das igrejas</li>
+                    <li>Inspirou reformas sociais</li>
+                    <li>Enfatizou a conversão pessoal e experiência emocional</li>
+                    <li>Fortaleceu denominações como batistas e metodistas</li>
+                </ul>
+
+                <h3>O "Grande Século das Missões"</h3>
+                <p>O século XIX é conhecido como o "Grande Século das Missões Protestantes". Missionários de diversas denominações foram enviados para todas as partes do mundo:</p>
+                <ul>
+                    <li><strong>William Carey:</strong> "Pai das missões modernas" na Índia</li>
+                    <li><strong>David Livingstone:</strong> Explorador e missionário na África</li>
+                    <li><strong>Hudson Taylor:</strong> Missões no interior da China</li>
+                </ul>
+
+                <h3>Protestantismo e Abolicionismo</h3>
+                <p>O Protestantismo desempenhou um papel significativo no movimento abolicionista:</p>
+                <ul>
+                    <li>Muitos líderes abolicionistas eram profundamente religiosos</li>
+                    <li>Igrejas protestantes organizaram atividades anti-escravidão</li>
+                    <li>A teologia protestante forneceu base moral para a luta</li>
+                    <li>Underground Railroad teve apoio de comunidades religiosas</li>
+                </ul>
+
+                <h3>Desenvolvimentos Teológicos</h3>
+                <p>O século XIX viu o surgimento de novos movimentos e teologias:</p>
+                <ul>
+                    <li>Teologia liberal</li>
+                    <li>Movimento de santidade</li>
+                    <li>Adventismo</li>
+                    <li>Restauracionismo</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Igreja Contemporânea -->
+        <section id="contemporanea" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">A Igreja Contemporânea (Séculos XX-XXI)</h2>
+                <p class="section-subtitle">Ecumenismo, Pentecostalismo e Desafios Globais</p>
+            </div>
+            <div class="section-content">
+                <h3>Movimentos Ecumênicos</h3>
+                <p>O século XX viu o florescimento do movimento ecumênico:</p>
+                <ul>
+                    <li>Formação do Conselho Mundial de Igrejas (1948)</li>
+                    <li>Diálogo inter-denominacional</li>
+                    <li>Cooperação em questões sociais</li>
+                    <li>Busca pela unidade cristã</li>
+                </ul>
+
+                <h3>Pentecostalismo e Neopentecostalismo</h3>
+                <p>O Pentecostalismo, surgido no início do século XX, tornou-se um dos movimentos cristãos de maior crescimento:</p>
+                <ul>
+                    <li><strong>Pentecostalismo Clássico:</strong> Ênfase nos dons espirituais</li>
+                    <li><strong>Neopentecostalismo:</strong> Teologia da prosperidade e batalha espiritual</li>
+                    <li>Crescimento explosivo no Sul Global</li>
+                    <li>Uso intensivo da mídia</li>
+                </ul>
+
+                <h3>Teologia da Libertação</h3>
+                <p>Surgida na América Latina nas décadas de 1960-70, a Teologia da Libertação:</p>
+                <ul>
+                    <li>Enfatizou a opção preferencial pelos pobres</li>
+                    <li>Integrou análise social marxista</li>
+                    <li>Promoveu engajamento político</li>
+                    <li>Influenciou movimentos sociais</li>
+                </ul>
+
+                <h3>Cristianismo Global e Desafios Contemporâneos</h3>
+                <p>O cristianismo do século XXI enfrenta diversos desafios:</p>
+                <ul>
+                    <li><strong>Secularização:</strong> Declínio da influência religiosa no Ocidente</li>
+                    <li><strong>Pluralismo Religioso:</strong> Necessidade de diálogo inter-religioso</li>
+                    <li><strong>Questões Éticas:</strong> Bioética, meio ambiente, direitos humanos</li>
+                    <li><strong>Perseguição Religiosa:</strong> Cristãos enfrentam perseguição em várias regiões</li>
+                    <li><strong>Globalização:</strong> Oportunidades e desafios da conectividade global</li>
+                </ul>
+
+                <h3>O Futuro da Igreja</h3>
+                <p>O cristianismo contemporâneo é caracterizado por:</p>
+                <ul>
+                    <li>Crescimento no Sul Global</li>
+                    <li>Declínio no Ocidente tradicional</li>
+                    <li>Diversidade cultural e teológica</li>
+                    <li>Uso de tecnologia digital</li>
+                    <li>Engajamento em questões sociais globais</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Show back to top button
+            document.querySelector('.back-to-top').style.display = 'block';
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        // Add smooth scrolling to timeline items
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            timelineItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(item);
+            });
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // Hide all sections and show introduction
+                showSection('introducao');
+            }
+        });
+    </script>
 </body>
 </html>
+
