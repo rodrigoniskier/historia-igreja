@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>História da Igreja Cristã - Estudo Acadêmico</title>
+    <title>História da Igreja Cristã - Perspectiva Reformada</title>
     <style>
         * {
             margin: 0;
@@ -12,11 +12,11 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
         }
 
         .container {
@@ -25,709 +25,1796 @@
             padding: 20px;
         }
 
-        header {
+        .header {
             text-align: center;
+            margin-bottom: 40px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 40px 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
 
-        h1 {
-            font-size: 2.5em;
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
             color: #2c3e50;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
         }
 
-        .subtitle {
-            font-size: 1.2em;
+        .header p {
+            font-size: 1.2rem;
             color: #7f8c8d;
+            position: relative;
+            z-index: 1;
+        }
+
+        .periods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .period-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .period-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            border-color: #3498db;
+        }
+
+        .period-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .period-card:hover::before {
+            left: 100%;
+        }
+
+        .period-number {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .period-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .period-date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
             font-style: italic;
         }
 
-        .navigation {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        .period-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        .nav-title {
-            font-size: 1.3em;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            text-align: center;
-            font-weight: bold;
+        .period-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .nav-item {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            text-decoration: none;
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            text-align: center;
-            font-weight: 500;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .nav-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(135deg, #2980b9, #3498db);
-        }
-
-        .content-section {
-            background: rgba(255, 255, 255, 0.95);
-            margin-bottom: 30px;
-            border-radius: 15px;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
             display: none;
-            animation: fadeIn 0.5s ease-in-out;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
         }
 
-        .content-section.active {
-            display: block;
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-50px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .section-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-
-        .section-subtitle {
-            font-size: 1em;
-            opacity: 0.9;
-            font-style: italic;
-        }
-
-        .section-content {
-            padding: 30px;
-        }
-
-        .section-content h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-        }
-
-        .section-content h4 {
-            color: #34495e;
-            margin: 20px 0 10px 0;
-            font-size: 1.1em;
-        }
-
-        .section-content p {
-            margin-bottom: 15px;
-            text-align: justify;
-            line-height: 1.8;
-        }
-
-        .section-content ul {
-            margin: 15px 0;
-            padding-left: 30px;
-        }
-
-        .section-content li {
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
-
-        .references {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border-left: 4px solid #3498db;
-        }
-
-        .references h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .references p {
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 5px;
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 1.5em;
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            display: none;
+            transition: color 0.3s;
         }
 
-        .back-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        .close:hover {
+            color: #e74c3c;
+        }
+
+        .flashcard {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flashcard:hover {
+            transform: rotateY(5deg) scale(1.02);
+        }
+
+        .flashcard.flipped {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        }
+
+        .quiz-container {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .quiz-option {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+        }
+
+        .quiz-option:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .content-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+            margin: 0 5px;
+        }
+
+        .sparkle {
+            animation: sparkle 1.5s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .navigation {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 500;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #3498db;
+            transform: scale(1.5);
         }
 
         .timeline {
             position: relative;
-            margin: 30px 0;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #3498db, #2980b9);
+            transform: translateX(-50%);
         }
 
         .timeline-item {
-            background: #f8f9fa;
+            position: relative;
+            margin: 30px 0;
             padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            border-left: 4px solid #3498db;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(10px);
+            background: white;
+            border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 45%;
         }
 
-        .timeline-date {
-            font-weight: bold;
-            color: #2c3e50;
-            font-size: 1.1em;
-            margin-bottom: 10px;
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            .nav-grid {
+            .periods-grid {
                 grid-template-columns: 1fr;
             }
-
-            .section-content {
-                padding: 20px;
+            
+            .timeline::before {
+                left: 20px;
             }
+            
+            .timeline-item {
+                width: calc(100% - 40px);
+                left: 40px !important;
+            }
+            
+            .timeline-item::before {
+                left: -30px !important;
+            }
+            
+            .navigation {
+                display: none;
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-cross {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>História da Igreja Cristã</h1>
-            <p class="subtitle">Um Estudo Acadêmico Abrangente</p>
-        </header>
-
-        <nav class="navigation">
-            <div class="nav-title">Navegação por Períodos Históricos</div>
-            <div class="nav-grid">
-                <a href="#" class="nav-item" onclick="showSection('introducao')">Introdução à História da Igreja</a>
-                <a href="#" class="nav-item" onclick="showSection('apostolico')">Período Apostólico</a>
-                <a href="#" class="nav-item" onclick="showSection('primitiva')">Igreja Primitiva (Séc. I-III)</a>
-                <a href="#" class="nav-item" onclick="showSection('consolidacao')">Consolidação da Igreja Antiga</a>
-                <a href="#" class="nav-item" onclick="showSection('medieval')">Igreja na Idade Média</a>
-                <a href="#" class="nav-item" onclick="showSection('reforma')">Reforma Protestante</a>
-                <a href="#" class="nav-item" onclick="showSection('moderna')">Era Moderna (Séc. XVII-XVIII)</a>
-                <a href="#" class="nav-item" onclick="showSection('seculo19')">Século XIX</a>
-                <a href="#" class="nav-item" onclick="showSection('contemporanea')">Igreja Contemporânea</a>
-            </div>
-        </nav>
-
-        <!-- Introdução -->
-        <section id="introducao" class="content-section active">
-            <div class="section-header">
-                <h2 class="section-title">Introdução à História da Igreja</h2>
-                <p class="section-subtitle">Conceito, Importância, Métodos, Fontes e Historiografia Cristã</p>
-            </div>
-            <div class="section-content">
-                <h3>O que é História da Igreja?</h3>
-                <p>A História da Igreja, também conhecida como História Eclesiástica, é o estudo acadêmico do desenvolvimento, expansão e transformação da Igreja Cristã ao longo dos séculos. Esta disciplina examina não apenas os eventos e personalidades que moldaram a fé cristã, mas também as interações complexas entre a Igreja e as sociedades em que ela se desenvolveu.</p>
-
-                <h3>Importância do Estudo</h3>
-                <p>O estudo da História da Igreja é fundamental para compreender:</p>
-                <ul>
-                    <li>O desenvolvimento das doutrinas e práticas cristãs</li>
-                    <li>A influência do cristianismo na civilização ocidental</li>
-                    <li>Os desafios e adaptações da Igreja ao longo do tempo</li>
-                    <li>As raízes históricas das diferentes denominações cristãs</li>
-                </ul>
-
-                <h3>Métodos e Fontes</h3>
-                <p>Os historiadores da Igreja utilizam uma variedade de fontes primárias e secundárias, incluindo documentos eclesiásticos, atas de concílios, escritos dos Pais da Igreja, arqueologia, arte sacra e literatura contemporânea. A metodologia histórica crítica é aplicada para analisar essas fontes de forma objetiva e contextualizada.</p>
-
-                <h3>Historiografia Cristã</h3>
-                <p>A historiografia cristã tem suas raízes nos próprios textos bíblicos, particularmente no livro de Atos dos Apóstolos. Ao longo dos séculos, historiadores como Eusébio de Cesareia, considerado o "pai da história eclesiástica", estabeleceram as bases para o estudo sistemático da história da Igreja.</p>
-            </div>
-        </section>
-
-        <!-- Período Apostólico -->
-        <section id="apostolico" class="content-section">
-            <div class="section-header">
-                <h2 class="section-title">A Igreja no Período Apostólico</h2>
-                <p class="section-subtitle">Pentecostes e a Expansão Inicial (30-100 d.C.)</p>
-            </div>
-            <div class="section-content">
-                <h3>Pentecostes: O Nascimento da Igreja</h3>
-                <p>O evento de Pentecostes, descrito em Atos 2, marca tradicionalmente o nascimento da Igreja Cristã. Neste dia, os apóstolos receberam o Espírito Santo e começaram a pregar o evangelho, resultando na conversão de cerca de três mil pessoas.</p>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">30 d.C.</div>
-                        <p>Crucificação e Ressurreição de Jesus Cristo</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">30 d.C. (Pentecostes)</div>
-                        <p>Descida do Espírito Santo e nascimento da Igreja</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">34-36 d.C.</div>
-                        <p>Conversão de Paulo de Tarso</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">49 d.C.</div>
-                        <p>Concílio de Jerusalém</p>
-                    </div>
-                </div>
-
-                <h3>A Comunidade de Jerusalém</h3>
-                <p>A primeira comunidade cristã em Jerusalém era caracterizada pela comunhão fraternal, partilha de bens, oração e ensino apostólico. Esta comunidade primitiva estabeleceu muitos dos padrões que influenciariam o desenvolvimento posterior da Igreja.</p>
-
-                <h3>As Missões Paulinas</h3>
-                <p>O apóstolo Paulo realizou três grandes viagens missionárias que foram fundamentais para a expansão do cristianismo além das fronteiras judaicas. Suas cartas às igrejas que fundou constituem uma parte significativa do Novo Testamento e fornecem insights valiosos sobre a vida e os desafios das primeiras comunidades cristãs.</p>
-
-                <h4>Características das Primeiras Comunidades:</h4>
-                <ul>
-                    <li>Organização simples com liderança apostólica</li>
-                    <li>Ênfase na comunhão e partilha</li>
-                    <li>Celebração da Ceia do Senhor</li>
-                    <li>Evangelização ativa</li>
-                    <li>Expectativa escatológica</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Igreja Primitiva -->
-        <section id="primitiva" class="content-section">
-            <div class="section-header">
-                <h2 class="section-title">A Igreja Primitiva (Séculos I-III)</h2>
-                <p class="section-subtitle">Perseguições, Mártires e Desenvolvimento Doutrinário</p>
-            </div>
-            <div class="section-content">
-                <h3>Perseguições Romanas</h3>
-                <p>A Igreja primitiva enfrentou períodos intensos de perseguição sob vários imperadores romanos. Estas perseguições, embora intermitentes, testaram a fé dos cristãos e contribuíram para o fortalecimento da identidade cristã.</p>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">64 d.C.</div>
-                        <p>Perseguição de Nero após o incêndio de Roma</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">81-96 d.C.</div>
-                        <p>Perseguição sob Domiciano</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">249-251 d.C.</div>
-                        <p>Perseguição sistemática de Décio</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">303-311 d.C.</div>
-                        <p>Grande Perseguição de Diocleciano</p>
-                    </div>
-                </div>
-
-                <h3>Os Mártires</h3>
-                <p>O martírio tornou-se um testemunho poderoso da fé cristã. Figuras como Estêvão (o primeiro mártir), Policarpo de Esmirna e Perpétua e Felicidade inspiraram gerações de cristãos com sua coragem e dedicação.</p>
-
-                <h3>Desenvolvimento Doutrinário</h3>
-                <p>Durante este período, a Igreja desenvolveu suas doutrinas fundamentais em resposta a desafios internos e externos:</p>
-                <ul>
-                    <li><strong>Cânon Bíblico:</strong> Processo gradual de reconhecimento dos livros do Novo Testamento</li>
-                    <li><strong>Sucessão Apostólica:</strong> Desenvolvimento da autoridade episcopal</li>
-                    <li><strong>Credos:</strong> Formulação de declarações de fé para combater heresias</li>
-                </ul>
-
-                <h3>Apologistas e Pais Apostólicos</h3>
-                <p>Os Pais Apostólicos (como Clemente de Roma e Inácio de Antioquia) e os Apologistas (como Justino Mártir e Tertuliano) defenderam a fé cristã contra ataques externos e desenvolveram a teologia cristã primitiva.</p>
-
-                <h3>Heresias e Respostas da Igreja</h3>
-                <p>A Igreja enfrentou várias heresias que ameaçavam a ortodoxia cristã:</p>
-                <ul>
-                    <li><strong>Gnosticismo:</strong> Negava a realidade da encarnação</li>
-                    <li><strong>Marcionismo:</strong> Rejeitava o Antigo Testamento</li>
-                    <li><strong>Montanismo:</strong> Enfatizava revelações proféticas contínuas</li>
-                    <li><strong>Modalismo:</strong> Negava a distinção das pessoas da Trindade</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Consolidação da Igreja Antiga -->
-        <section id="consolidacao" class="content-section">
-            <div class="section-header">
-                <h2 class="section-title">Consolidação da Igreja Antiga</h2>
-                <p class="section-subtitle">Concílios Ecumênicos e o Edito de Milão</p>
-            </div>
-            <div class="section-content">
-                <h3>Constantino e o Edito de Milão (313 d.C.)</h3>
-                <p>O imperador Constantino promulgou o Edito de Milão em 313 d.C., concedendo tolerância religiosa ao cristianismo e marcando o fim das perseguições sistemáticas. Este evento transformou radicalmente a posição da Igreja no Império Romano.</p>
-
-                <h3>Os Primeiros Concílios Ecumênicos</h3>
-                <p>Os concílios ecumênicos foram assembleias de bispos de toda a Igreja que se reuniram para resolver questões doutrinárias e disciplinares importantes:</p>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">325 d.C.</div>
-                        <p><strong>Concílio de Niceia I:</strong> Condenou o arianismo e formulou o Credo Niceno</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">381 d.C.</div>
-                        <p><strong>Concílio de Constantinopla I:</strong> Reafirmou a divindade do Espírito Santo</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">431 d.C.</div>
-                        <p><strong>Concílio de Éfeso:</strong> Condenou o nestorianismo</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">451 d.C.</div>
-                        <p><strong>Concílio de Calcedônia:</strong> Definiu a doutrina das duas naturezas de Cristo</p>
-                    </div>
-                </div>
-
-                <h3>Consequências da Aliança Igreja-Estado</h3>
-                <p>A aliança entre a Igreja e o Estado trouxe benefícios e desafios:</p>
-                <ul>
-                    <li><strong>Benefícios:</strong> Fim das perseguições, recursos para construção de igrejas, expansão missionária</li>
-                    <li><strong>Desafios:</strong> Interferência imperial em assuntos eclesiásticos, cristianização superficial, perda da pureza apostólica</li>
-                </ul>
-
-                <h3>Desenvolvimento da Estrutura Eclesiástica</h3>
-                <p>Durante este período, a Igreja desenvolveu uma estrutura hierárquica mais complexa, com a emergência dos patriarcados (Roma, Constantinopla, Alexandria, Antioquia e Jerusalém) e o fortalecimento da autoridade episcopal.</p>
-            </div>
-        </section>
-
-        <!-- Igreja Medieval -->
-        <section id="medieval" class="content-section">
-            <div class="section-header">
-                <h2 class="section-title">A Igreja na Idade Média</h2>
-                <p class="section-subtitle">Monasticismo, Escolástica e Poder Papal (Séculos IV-XV)</p>
-            </div>
-            <div class="section-content">
-                <h3>Queda de Roma e Ascensão do Papado</h3>
-                <p>Com a queda do Império Romano do Ocidente em 476 d.C., a Igreja, especialmente o Papado, assumiu um papel de liderança política e cultural na Europa. O Papa tornou-se não apenas um líder espiritual, mas também uma figura política de grande influência.</p>
-
-                <h3>Cristianização da Europa</h3>
-                <p>A Idade Média foi um período de intensa cristianização da Europa, com a fé cristã se espalhando para regiões que antes eram pagãs. Monges e missionários desempenharam um papel crucial, estabelecendo mosteiros que serviam como centros de aprendizado, cultura e evangelização.</p>
-
-                <h3>Monasticismo: Origens, Ordens e Influência</h3>
-                <p>O monasticismo foi um movimento de profunda importância na Idade Média:</p>
-                <ul>
-                    <li><strong>Beneditinos:</strong> Fundada por São Bento, foi a ordem mais influente na Alta Idade Média</li>
-                    <li><strong>Cluniacenses:</strong> Reforma do monasticismo beneditino no século X</li>
-                    <li><strong>Cistercienses:</strong> Retorno à simplicidade da Regra Beneditina original</li>
-                    <li><strong>Ordens Mendicantes:</strong> Franciscanos e Dominicanos no século XIII</li>
-                </ul>
-
-                <h3>Escolástica e Teologia Medieval</h3>
-                <p>A Escolástica foi o método filosófico e teológico dominante nas universidades medievais, buscando conciliar a fé cristã com a razão, especialmente a filosofia de Aristóteles. Principais figuras incluem:</p>
-                <ul>
-                    <li><strong>Anselmo de Cantuária:</strong> "Pai da Escolástica"</li>
-                    <li><strong>Tomás de Aquino:</strong> Síntese entre aristotelismo e cristianismo</li>
-                    <li><strong>João Duns Escoto:</strong> Ênfase na vontade de Deus</li>
-                </ul>
-
-                <h3>Cismas: Oriental (1054) e Ocidental</h3>
-                <p>A Igreja medieval foi marcada por duas grandes divisões:</p>
-                <ul>
-                    <li><strong>Cisma do Oriente (1054):</strong> Separação entre Igreja Católica Romana e Igreja Ortodoxa</li>
-                    <li><strong>Cisma do Ocidente (1378-1417):</strong> Período com dois ou três papas simultâneos</li>
-                </ul>
-
-                <h3>Cruzadas e Inquisição</h3>
-                <p>Dois fenômenos controversos marcaram a Igreja medieval:</p>
-                <ul>
-                    <li><strong>Cruzadas (1095-1291):</strong> Expedições militares para retomar a Terra Santa</li>
-                    <li><strong>Inquisição (século XIII):</strong> Tribunal eclesiástico para combater heresias</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Reforma Protestante -->
-        <section id="reforma" class="content-section">
-            <div class="section-header">
-                <h2 class="section-title">A Reforma Protestante (Século XVI)</h2>
-                <p class="section-subtitle">Causas, Figuras-Chave e Principais Ramos</p>
-            </div>
-            <div class="section-content">
-                <h3>Causas da Reforma</h3>
-                <p>A Reforma Protestante foi impulsionada por uma série de fatores:</p>
-                <ul>
-                    <li><strong>Corrupção da Igreja:</strong> Venda de indulgências, simonia e nicolaísmo</li>
-                    <li><strong>Questões Teológicas:</strong> Questionamento da doutrina católica sobre salvação</li>
-                    <li><strong>Fatores Políticos:</strong> Desejo de independência da autoridade papal</li>
-                    <li><strong>Invenção da Imprensa:</strong> Facilitou a disseminação das ideias reformistas</li>
-                </ul>
-
-                <h3>Martinho Lutero e o Luteranismo</h3>
-                <p>Martinho Lutero, monge agostiniano alemão, iniciou a Reforma em 1517 com suas 95 Teses. Sua teologia enfatizava:</p>
-                <ul>
-                    <li>Justificação pela fé somente (<em>sola fide</em>)</li>
-                    <li>Autoridade da Escritura somente (<em>sola scriptura</em>)</li>
-                    <li>Sacerdócio de todos os crentes</li>
-                </ul>
-
-                <h3>João Calvino e o Calvinismo</h3>
-                <p>João Calvino desenvolveu uma teologia sistemática em Genebra, enfatizando:</p>
-                <ul>
-                    <li>Soberania de Deus</li>
-                    <li>Predestinação</li>
-                    <li>Disciplina moral rigorosa</li>
-                </ul>
-
-                <h3>Henrique VIII e o Anglicanismo</h3>
-                <p>A Reforma na Inglaterra teve motivações políticas, com Henrique VIII rompendo com Roma em 1534. O Anglicanismo manteve características católicas na liturgia, mas adotou princípios protestantes na doutrina.</p>
-
-                <h3>Consequências da Reforma</h3>
-                <ul>
-                    <li>Divisão da cristandade ocidental</li>
-                    <li>Guerras religiosas</li>
-                    <li>Contrarreforma Católica</li>
-                    <li>Desenvolvimento do nacionalismo</li>
-                    <li>Impacto cultural e social</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Era Moderna -->
-        <section id="moderna" class="content-section">
-            <div class="section-header">
-                <h2 class="section-title">A Igreja na Era Moderna (Séculos XVII-XVIII)</h2>
-                <p class="section-subtitle">Guerras Religiosas, Iluminismo e Avivamentos</p>
-            </div>
-            <div class="section-content">
-                <h3>Guerras Religiosas</h3>
-                <p>Após a Reforma Protestante, a Europa foi palco de guerras religiosas devastadoras, incluindo a Guerra dos Trinta Anos (1618-1648). O Tratado de Vestfália estabeleceu o princípio <em>cuius regio, eius religio</em>.</p>
-
-                <h3>Iluminismo e Secularização</h3>
-                <p>O século XVIII foi marcado pelo Iluminismo, que desafiou a autoridade tradicional da Igreja:</p>
-                <ul>
-                    <li>Ênfase na razão e ciência</li>
-                    <li>Crítica aos dogmas religiosos</li>
-                    <li>Promoção da tolerância religiosa</li>
-                    <li>Separação entre Igreja e Estado</li>
-                </ul>
-
-                <h3>Pietismo e Avivamentos</h3>
-                <p>Em contraste com o racionalismo iluminista, surgiram movimentos de renovação espiritual:</p>
-                <ul>
-                    <li><strong>Pietismo (Alemanha):</strong> Ênfase na experiência pessoal da fé</li>
-                    <li><strong>Metodismo (Inglaterra):</strong> Movimento de avivamento liderado por John Wesley</li>
-                    <li><strong>Grande Despertar (América):</strong> Avivamento nas colônias americanas</li>
-                </ul>
-
-                <h3>Missões Protestantes e Católicas</h3>
-                <p>A Era Moderna foi um período de intensa atividade missionária. A Igreja Católica continuou seus esforços através dos Jesuítas, enquanto os protestantes começaram a desenvolver um movimento missionário mais organizado.</p>
-            </div>
-        </section>
-
-        <!-- Século XIX -->
-        <section id="seculo19" class="content-section">
-            <div class="section-header">
-                <h2 class="section-title">A Igreja no Século XIX</h2>
-                <p class="section-subtitle">Avivamentos, Missões Globais e Abolicionismo</p>
-            </div>
-            <div class="section-content">
-                <h3>Segundo Grande Despertar</h3>
-                <p>Nos Estados Unidos, o Segundo Grande Despertar (1790-1840) foi um movimento de avivamento que:</p>
-                <ul>
-                    <li>Aumentou significativamente o número de membros das igrejas</li>
-                    <li>Inspirou reformas sociais</li>
-                    <li>Enfatizou a conversão pessoal e experiência emocional</li>
-                    <li>Fortaleceu denominações como batistas e metodistas</li>
-                </ul>
-
-                <h3>O "Grande Século das Missões"</h3>
-                <p>O século XIX é conhecido como o "Grande Século das Missões Protestantes". Missionários de diversas denominações foram enviados para todas as partes do mundo:</p>
-                <ul>
-                    <li><strong>William Carey:</strong> "Pai das missões modernas" na Índia</li>
-                    <li><strong>David Livingstone:</strong> Explorador e missionário na África</li>
-                    <li><strong>Hudson Taylor:</strong> Missões no interior da China</li>
-                </ul>
-
-                <h3>Protestantismo e Abolicionismo</h3>
-                <p>O Protestantismo desempenhou um papel significativo no movimento abolicionista:</p>
-                <ul>
-                    <li>Muitos líderes abolicionistas eram profundamente religiosos</li>
-                    <li>Igrejas protestantes organizaram atividades anti-escravidão</li>
-                    <li>A teologia protestante forneceu base moral para a luta</li>
-                    <li>Underground Railroad teve apoio de comunidades religiosas</li>
-                </ul>
-
-                <h3>Desenvolvimentos Teológicos</h3>
-                <p>O século XIX viu o surgimento de novos movimentos e teologias:</p>
-                <ul>
-                    <li>Teologia liberal</li>
-                    <li>Movimento de santidade</li>
-                    <li>Adventismo</li>
-                    <li>Restauracionismo</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Igreja Contemporânea -->
-        <section id="contemporanea" class="content-section">
-            <div class="section-header">
-                <h2 class="section-title">A Igreja Contemporânea (Séculos XX-XXI)</h2>
-                <p class="section-subtitle">Ecumenismo, Pentecostalismo e Desafios Globais</p>
-            </div>
-            <div class="section-content">
-                <h3>Movimentos Ecumênicos</h3>
-                <p>O século XX viu o florescimento do movimento ecumênico:</p>
-                <ul>
-                    <li>Formação do Conselho Mundial de Igrejas (1948)</li>
-                    <li>Diálogo inter-denominacional</li>
-                    <li>Cooperação em questões sociais</li>
-                    <li>Busca pela unidade cristã</li>
-                </ul>
-
-                <h3>Pentecostalismo e Neopentecostalismo</h3>
-                <p>O Pentecostalismo, surgido no início do século XX, tornou-se um dos movimentos cristãos de maior crescimento:</p>
-                <ul>
-                    <li><strong>Pentecostalismo Clássico:</strong> Ênfase nos dons espirituais</li>
-                    <li><strong>Neopentecostalismo:</strong> Teologia da prosperidade e batalha espiritual</li>
-                    <li>Crescimento explosivo no Sul Global</li>
-                    <li>Uso intensivo da mídia</li>
-                </ul>
-
-                <h3>Teologia da Libertação</h3>
-                <p>Surgida na América Latina nas décadas de 1960-70, a Teologia da Libertação:</p>
-                <ul>
-                    <li>Enfatizou a opção preferencial pelos pobres</li>
-                    <li>Integrou análise social marxista</li>
-                    <li>Promoveu engajamento político</li>
-                    <li>Influenciou movimentos sociais</li>
-                </ul>
-
-                <h3>Cristianismo Global e Desafios Contemporâneos</h3>
-                <p>O cristianismo do século XXI enfrenta diversos desafios:</p>
-                <ul>
-                    <li><strong>Secularização:</strong> Declínio da influência religiosa no Ocidente</li>
-                    <li><strong>Pluralismo Religioso:</strong> Necessidade de diálogo inter-religioso</li>
-                    <li><strong>Questões Éticas:</strong> Bioética, meio ambiente, direitos humanos</li>
-                    <li><strong>Perseguição Religiosa:</strong> Cristãos enfrentam perseguição em várias regiões</li>
-                    <li><strong>Globalização:</strong> Oportunidades e desafios da conectividade global</li>
-                </ul>
-
-                <h3>O Futuro da Igreja</h3>
-                <p>O cristianismo contemporâneo é caracterizado por:</p>
-                <ul>
-                    <li>Crescimento no Sul Global</li>
-                    <li>Declínio no Ocidente tradicional</li>
-                    <li>Diversidade cultural e teológica</li>
-                    <li>Uso de tecnologia digital</li>
-                    <li>Engajamento em questões sociais globais</li>
-                </ul>
-            </div>
-        </section>
+    <div class="floating-elements">
+        <div class="floating-cross" style="top: 10%; left: 10%; animation-delay: 0s;">✟</div>
+        <div class="floating-cross" style="top: 20%; right: 15%; animation-delay: 1s;">⛪</div>
+        <div class="floating-cross" style="bottom: 30%; left: 20%; animation-delay: 2s;">✝</div>
+        <div class="floating-cross" style="bottom: 15%; right: 25%; animation-delay: 3s;">📖</div>
     </div>
 
-    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+    <div class="navigation" id="navigation">
+        <div class="nav-dot active" data-period="0"></div>
+        <div class="nav-dot" data-period="1"></div>
+        <div class="nav-dot" data-period="2"></div>
+        <div class="nav-dot" data-period="3"></div>
+        <div class="nav-dot" data-period="4"></div>
+        <div class="nav-dot" data-period="5"></div>
+        <div class="nav-dot" data-period="6"></div>
+        <div class="nav-dot" data-period="7"></div>
+        <div class="nav-dot" data-period="8"></div>
+        <div class="nav-dot" data-period="9"></div>
+        <div class="nav-dot" data-period="10"></div>
+        <div class="nav-dot" data-period="11"></div>
+        <div class="nav-dot" data-period="12"></div>
+        <div class="nav-dot" data-period="13"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>⛪ História da Igreja Cristã <span class="sparkle">✨</span></h1>
+            <p>Na Perspectiva Reformada Aliancista <span class="emoji">📜</span></p>
+        </div>
+
+        <div class="periods-grid" id="periodsGrid">
+            <!-- Períodos serão inseridos dinamicamente -->
+        </div>
+    </div>
+
+    <!-- Modal para conteúdo detalhado -->
+    <div id="contentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
 
     <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
+        const periods = [
+            {
+                number: "I",
+                title: "A Igreja no Éden",
+                date: "Criação - Queda",
+                description: "A igreja primitiva no estado de inocência original, sob a aliança das obras.",
+                emoji: "🌳",
+                content: {
+                    main: `
+                        <h3>🌳 A Igreja Primitiva no Éden</h3>
+                        <p>Na perspectiva reformada, a igreja não começa em Pentecostes, mas no próprio <span class="highlight">Jardim do Éden</span>. Adão e Eva representavam toda a humanidade sob a <span class="highlight">aliança das obras</span>.</p>
+                        
+                        <div class="content-section">
+                            <h3>🏛️ Ofícios Originais</h3>
+                            <p><strong>Profeta:</strong> Conheciam a Deus diretamente <span class="emoji">👁️</span></p>
+                            <p><strong>Sacerdote:</strong> Mediavam entre criação e Criador <span class="emoji">🙏</span></p>
+                            <p><strong>Rei:</strong> Dominavam sobre toda a terra <span class="emoji">👑</span></p>
+                        </div>
 
-            // Show selected section
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-                targetSection.scrollIntoView({ behavior: 'smooth' });
+                        <div class="content-section">
+                            <h3>🐍 A Queda e o Protoevangelium</h3>
+                            <p>Com a queda em <span class="highlight">Gênesis 3:15</span>, foi proclamado o primeiro evangelho: "Porei inimizade entre ti e a mulher, entre a tua descendência e o seu descendente." <span class="emoji">⚔️</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "O que é a aliança das obras? 🤔",
+                            back: "A aliança estabelecida com Adão no Éden, onde a vida eterna dependia da obediência perfeita à lei de Deus. ⚖️"
+                        },
+                        {
+                            front: "O que significa protoevangelium? 📖",
+                            back: "O 'primeiro evangelho' em Gênesis 3:15, a primeira promessa de redenção após a queda. ✨"
+                        },
+                        {
+                            front: "Quais eram os três ofícios de Adão? 👤",
+                            back: "Profeta (conhecia a Deus), Sacerdote (mediava a criação), Rei (dominava a terra). 👑"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Onde começou a igreja na perspectiva reformada? 🌍",
+                            options: [
+                                "Em Pentecostes",
+                                "No Éden",
+                                "Com Abraão",
+                                "Com Moisés"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "O que foi o protoevangelium? 📜",
+                            options: [
+                                "O primeiro livro da Bíblia",
+                                "A primeira promessa de salvação",
+                                "O primeiro sacrifício",
+                                "A primeira oração"
+                            ],
+                            correct: 1
+                        }
+                    ]
+                }
+            },
+            {
+                number: "II",
+                title: "Igreja Patriarcal",
+                date: "2000-1500 a.C.",
+                description: "O período dos patriarcas: Abraão, Isaque, Jacó e José. A aliança abraâmica estabelece as promessas fundamentais.",
+                emoji: "⭐",
+                content: {
+                    main: `
+                        <h3>⭐ A Era dos Patriarcas</h3>
+                        <p>Deus estabeleceu sua <span class="highlight">aliança com Abraão</span>, prometendo fazer dele uma grande nação e abençoar todas as famílias da terra através de sua descendência.</p>
+                        
+                        <div class="content-section">
+                            <h3>👨‍👨‍👦‍👦 Os Grandes Patriarcas</h3>
+                            <p><strong>Abraão:</strong> "Amigo de Deus", pai da fé <span class="emoji">🤝</span></p>
+                            <p><strong>Isaque:</strong> Filho da promessa <span class="emoji">👶</span></p>
+                            <p><strong>Jacó/Israel:</strong> Pai das doze tribos <span class="emoji">👨‍👩‍👧‍👦</span></p>
+                            <p><strong>José:</strong> Preservador do povo no Egito <span class="emoji">🏺</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>📋 Características da Igreja Patriarcal</h3>
+                            <p>• Adoração familiar centrada no chefe da casa <span class="emoji">🏠</span></p>
+                            <p>• Sacrifícios oferecidos pelos próprios patriarcas <span class="emoji">🔥</span></p>
+                            <p>• Transmissão oral das promessas divinas <span class="emoji">👂</span></p>
+                            <p>• Circuncisão como sinal da aliança <span class="emoji">✂️</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "Qual foi a promessa central da aliança abraâmica? 🌟",
+                            back: "Fazer de Abraão uma grande nação e abençoar todas as famílias da terra através de sua descendência. 🌍"
+                        },
+                        {
+                            front: "Por que Abraão é chamado 'amigo de Deus'? 🤝",
+                            back: "Por causa de sua fé extraordinária e obediência, especialmente demonstrada no sacrifício de Isaque. ⛰️"
+                        },
+                        {
+                            front: "Qual era o sinal da aliança abraâmica? ✂️",
+                            back: "A circuncisão, que marcava fisicamente a entrada na comunidade da aliança. 📜"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Quem foi chamado de 'amigo de Deus'? 👥",
+                            options: [
+                                "Isaque",
+                                "Jacó",
+                                "Abraão",
+                                "José"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "Quantas tribos descenderam de Jacó? 🔢",
+                            options: [
+                                "10",
+                                "11",
+                                "12",
+                                "13"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                }
+            },
+            {
+                number: "III",
+                title: "Igreja Mosaica",
+                date: "1500-1000 a.C.",
+                description: "O período da teocracia israelita: o êxodo, a lei mosaica, o tabernáculo e o sistema sacrificial.",
+                emoji: "📜",
+                content: {
+                    main: `
+                        <h3>📜 A Teocracia de Israel</h3>
+                        <p>O êxodo do Egito marca a constituição formal de Israel como <span class="highlight">nação teocrática</span>. No Sinai, Deus estabeleceu a aliança mosaica com três aspectos da lei.</p>
+                        
+                        <div class="content-section">
+                            <h3>⚖️ Os Três Aspectos da Lei</h3>
+                            <p><strong>Lei Moral:</strong> Os Dez Mandamentos (perpétuos) <span class="emoji">💎</span></p>
+                            <p><strong>Lei Civil:</strong> Regulamentações nacionais (temporárias) <span class="emoji">🏛️</span></p>
+                            <p><strong>Lei Cerimonial:</strong> Sistema sacrificial (temporário, prefigura Cristo) <span class="emoji">🔥</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⛪ O Tabernáculo e Sacerdócio</h3>
+                            <p><strong>Tabernáculo:</strong> Habitação simbólica de Deus entre seu povo <span class="emoji">🏕️</span></p>
+                            <p><strong>Sacerdócio Levítico:</strong> Mediação através de sacrifícios <span class="emoji">👨‍💼</span></p>
+                            <p><strong>Sumo Sacerdote:</strong> Única entrada anual no Santo dos Santos <span class="emoji">🚪</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⚖️ O Período dos Juízes</h3>
+                            <p>Ciclos de apostasia e restauração através de libertadores levantados por Deus <span class="emoji">🔄</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "Quais são os três aspectos da lei mosaica? 📋",
+                            back: "Lei Moral (perpétua), Lei Civil (temporária) e Lei Cerimonial (temporária, prefigura Cristo). ⚖️"
+                        },
+                        {
+                            front: "O que simbolizava o tabernáculo? ⛪",
+                            back: "A habitação simbólica de Deus entre seu povo, prefigurando a presença de Cristo conosco. 🏕️"
+                        },
+                        {
+                            front: "Qual era a função única do sumo sacerdote? 👨‍💼",
+                            back: "Entrar uma vez por ano no Santo dos Santos para fazer expiação pelo povo. 🚪"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Quantos mandamentos compõem a lei moral? 🔢",
+                            options: [
+                                "7",
+                                "8",
+                                "10",
+                                "12"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "O que caracterizou o período dos juízes? ⚖️",
+                            options: [
+                                "Paz constante",
+                                "Ciclos de apostasia e restauração",
+                                "Guerra civil",
+                                "Expansão territorial"
+                            ],
+                            correct: 1
+                        }
+                    ]
+                }
+            },
+            {
+                number: "IV",
+                title: "Igreja Monárquica",
+                date: "1000-586 a.C.",
+                description: "O reino unido sob Saul, Davi e Salomão, seguido pela divisão e pelo ministério profético.",
+                emoji: "👑",
+                content: {
+                    main: `
+                        <h3>👑 A Era dos Reis</h3>
+                        <p>O estabelecimento da monarquia em Israel marca uma nova fase da igreja do Antigo Testamento, culminando na <span class="highlight">aliança davídica</span> e nas promessas messiânicas.</p>
+                        
+                        <div class="content-section">
+                            <h3>🏰 O Reino Unido</h3>
+                            <p><strong>Saul:</strong> Primeiro rei, modelo de liderança falha <span class="emoji">⚔️</span></p>
+                            <p><strong>Davi:</strong> Rei segundo o coração de Deus, recebeu promessas messiânicas <span class="emoji">❤️</span></p>
+                            <p><strong>Salomão:</strong> Construiu o templo, período de maior glória <span class="emoji">🏛️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>📖 A Aliança Davídica</h3>
+                            <p>Deus prometeu a Davi que sua dinastia seria eterna e que de sua linhagem viria o <span class="highlight">Messias</span>. Esta aliança é fundamental para entender Cristo como "Filho de Davi" <span class="emoji">👑</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⚡ O Reino Dividido</h3>
+                            <p><strong>Reino do Norte (Israel):</strong> Dez tribos, apostasia sistemática <span class="emoji">🔥</span></p>
+                            <p><strong>Reino do Sul (Judá):</strong> Duas tribos, manteve o culto legítimo <span class="emoji">⛪</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🗣️ Os Profetas</h3>
+                            <p><strong>Isaías:</strong> "Evangelho do AT", profecias messiânicas detalhadas <span class="emoji">📜</span></p>
+                            <p><strong>Jeremias:</strong> Profeta das lágrimas, anunciou a nova aliança <span class="emoji">😢</span></p>
+                            <p><strong>Ezequiel:</strong> Ministrou no exílio, visões da restauração <span class="emoji">👁️</span></p>
+                            <p><strong>Daniel:</strong> Profeta apocalíptico, profecias dos reinos <span class="emoji">🦁</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "Qual foi a promessa central da aliança davídica? 👑",
+                            back: "Que a dinastia de Davi seria eterna e de sua linhagem viria o Messias, cumprida em Jesus Cristo. ✨"
+                        },
+                        {
+                            front: "Por que Isaías é chamado de 'Evangelho do AT'? 📖",
+                            back: "Porque contém as profecias messiânicas mais detalhadas, especialmente sobre o Servo Sofredor. 🎯"
+                        },
+                        {
+                            front: "Qual profeta anunciou a nova aliança? 📋",
+                            back: "Jeremias profetizou sobre a nova aliança em Jeremias 31:31-34. 📜"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Qual rei construiu o primeiro templo? 🏛️",
+                            options: [
+                                "Saul",
+                                "Davi",
+                                "Salomão",
+                                "Ezequias"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "Quantas tribos formavam o reino do norte? 🔢",
+                            options: [
+                                "Duas",
+                                "Dez",
+                                "Onze",
+                                "Doze"
+                            ],
+                            correct: 1
+                        }
+                    ]
+                }
+            },
+            {
+                number: "V",
+                title: "Igreja no Exílio",
+                date: "586-400 a.C.",
+                description: "O cativeiro babilônico, a restauração sob Zorobabel, Esdras e Neemias, e o desenvolvimento pós-exílico.",
+                emoji: "⛓️",
+                content: {
+                    main: `
+                        <h3>⛓️ O Cativeiro e a Restauração</h3>
+                        <p>O exílio babilônico foi tanto <span class="highlight">juízo divino</span> quanto meio de purificação da igreja. A restauração trouxe renovação espiritual e maior centralidade da Torah.</p>
+                        
+                        <div class="content-section">
+                            <h3>🏙️ O Exílio Babilônico (586-539 a.C.)</h3>
+                            <p>• Destruição do templo e fim dos sacrifícios <span class="emoji">💥</span></p>
+                            <p>• Dispersão do povo escolhido <span class="emoji">🌍</span></p>
+                            <p>• Desenvolvimento da sinagoga como centro de culto <span class="emoji">🏠</span></p>
+                            <p>• Preservação da identidade através da Torah <span class="emoji">📚</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🏗️ A Restauração (539-400 a.C.)</h3>
+                            <p><strong>Zorobabel:</strong> Liderou a reconstrução do templo <span class="emoji">⛪</span></p>
+                            <p><strong>Esdras:</strong> Restaurou o estudo e ensino da Lei <span class="emoji">📖</span></p>
+                            <p><strong>Neemias:</strong> Reconstruiu os muros de Jerusalém <span class="emoji">🧱</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🔄 Transformações Pós-Exílicas</h3>
+                            <p>• Maior centralidade da Torah escrita <span class="emoji">📜</span></p>
+                            <p>• Desenvolvimento do sistema sinagogal <span class="emoji">🏛️</span></p>
+                            <p>• Surgimento dos escribas como intérpretes <span class="emoji">✍️</span></p>
+                            <p>• Expectativa messiânica intensificada <span class="emoji">⭐</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "Qual foi o propósito divino do exílio? 🤔",
+                            back: "Foi tanto juízo pela desobediência quanto meio de purificação e renovação espiritual do povo. 🔥"
+                        },
+                        {
+                            front: "O que se desenvolveu durante o exílio? 🏠",
+                            back: "O sistema sinagogal como centro de culto e estudo da Torah na ausência do templo. 📚"
+                        },
+                        {
+                            front: "Quem foi Esdras? 👨‍🏫",
+                            back: "Sacerdote e escriba que restaurou o estudo sistemático da Lei e reformou a vida espiritual pós-exílio. 📖"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Quanto tempo durou o exílio babilônico? ⏰",
+                            options: [
+                                "40 anos",
+                                "47 anos",
+                                "50 anos",
+                                "70 anos"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Quem liderou a reconstrução do templo? 🏗️",
+                            options: [
+                                "Esdras",
+                                "Neemias",
+                                "Zorobabel",
+                                "Josué"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                }
+            },
+            {
+                number: "VI",
+                title: "Período Intertestamentário",
+                date: "400-4 a.C.",
+                description: "Os 400 anos de silêncio profético: domínios persa, grego e romano, desenvolvimento de seitas judaicas.",
+                emoji: "🤐",
+                content: {
+                    main: `
+                        <h3>🤐 Os 400 Anos de Silêncio</h3>
+                        <p>Período sem revelação profética, mas com <span class="highlight">desenvolvimentos significativos</span> que prepararam o mundo para a vinda do Messias.</p>
+                        
+                        <div class="content-section">
+                            <h3>🏛️ Sucessão de Impérios</h3>
+                            <p><strong>Domínio Persa (539-332 a.C.):</strong> Tolerância religiosa <span class="emoji">🤝</span></p>
+                            <p><strong>Domínio Grego (332-167 a.C.):</strong> Helenização cultural <span class="emoji">🏺</span></p>
+                            <p><strong>Período Macabeu (167-63 a.C.):</strong> Resistência e independência <span class="emoji">⚔️</span></p>
+                            <p><strong>Domínio Romano (63 a.C.+):</strong> Pax Romana <span class="emoji">🦅</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🕍 Seitas Judaicas</h3>
+                            <p><strong>Fariseus:</strong> Tradição oral e observância ritual <span class="emoji">📋</span></p>
+                            <p><strong>Saduceus:</strong> Partido sacerdotal, negavam ressurreição <span class="emoji">⛪</span></p>
+                            <p><strong>Essênios:</strong> Comunidade monástica em Qumran <span class="emoji">🏜️</span></p>
+                            <p><strong>Zelotes:</strong> Movimento revolucionário político-religioso <span class="emoji">💥</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>📚 Literatura e Expectativas</h3>
+                            <p>• Produção de literatura apócrifa e pseudoepígrafa <span class="emoji">📜</span></p>
+                            <p>• Desenvolvimento da literatura apocalíptica <span class="emoji">👁️</span></p>
+                            <p>• Intensificação das expectativas messiânicas <span class="emoji">⭐</span></p>
+                            <p>• Preparação cultural para o evangelho <span class="emoji">🌍</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "Por que este período é chamado de 'silêncio'? 🤐",
+                            back: "Porque não houve revelação profética por 400 anos, entre Malaquias e João Batista. 📜"
+                        },
+                        {
+                            front: "Qual seita negava a ressurreição? ❌",
+                            back: "Os saduceus, que eram o partido sacerdotal e só aceitavam a Torah escrita. ⛪"
+                        },
+                        {
+                            front: "O que foi a Pax Romana? 🦅",
+                            back: "Período de paz imposto pelo Império Romano que facilitou a expansão do evangelho. 🌍"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Quanto tempo durou o período intertestamentário? ⏰",
+                            options: [
+                                "300 anos",
+                                "400 anos",
+                                "500 anos",
+                                "600 anos"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Qual seita vivia em comunidade em Qumran? 🏜️",
+                            options: [
+                                "Fariseus",
+                                "Saduceus",
+                                "Essênios",
+                                "Zelotes"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                }
+            },
+            {
+                number: "VII",
+                title: "Igreja Apostólica",
+                date: "4 a.C. - 100 d.C.",
+                description: "A vinda do Messias, seu ministério, morte, ressurreição, Pentecostes e a expansão apostólica.",
+                emoji: "✝️",
+                content: {
+                    main: `
+                        <h3>✝️ A Plenitude dos Tempos</h3>
+                        <p>Cristo veio na <span class="highlight">plenitude dos tempos</span> (Gálatas 4:4), cumprindo todas as alianças anteriores e inaugurando a nova aliança em seu sangue.</p>
+                        
+                        <div class="content-section">
+                            <h3>👶 A Encarnação e Ministério</h3>
+                            <p><strong>Encarnação:</strong> O Verbo se fez carne (João 1:14) <span class="emoji">⭐</span></p>
+                            <p><strong>Ministério Terreno:</strong> Pregação do Reino, milagres, ensino <span class="emoji">🎤</span></p>
+                            <p><strong>Morte e Ressurreição:</strong> Cumprimento da obra redentora <span class="emoji">⚰️➡️👑</span></p>
+                            <p><strong>Ascensão:</strong> Exaltação à destra do Pai <span class="emoji">☁️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>📋 Cumprimento das Alianças</h3>
+                            <p><strong>Aliança Abraâmica:</strong> Cristo como a verdadeira descendência <span class="emoji">⭐</span></p>
+                            <p><strong>Aliança Mosaica:</strong> Cristo como cumprimento da Lei <span class="emoji">⚖️</span></p>
+                            <p><strong>Aliança Davídica:</strong> Cristo como Rei eterno <span class="emoji">👑</span></p>
+                            <p><strong>Nova Aliança:</strong> Estabelecida no sangue de Cristo <span class="emoji">🍷</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🔥 Pentecostes e Expansão</h3>
+                            <p>• Descida do Espírito Santo <span class="emoji">🕊️</span></p>
+                            <p>• Inauguração da era da igreja <span class="emoji">⛪</span></p>
+                            <p>• Expansão missionária aos gentios <span class="emoji">🌍</span></p>
+                            <p>• Estabelecimento de comunidades cristãs <span class="emoji">👥</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>👨‍💼 Os Apóstolos</h3>
+                            <p><strong>Pedro:</strong> Apóstolo aos judeus, liderança inicial <span class="emoji">🗝️</span></p>
+                            <p><strong>Paulo:</strong> Apóstolo aos gentios, plantador de igrejas <span class="emoji">🌱</span></p>
+                            <p><strong>João:</strong> Apóstolo do amor, teólogo da encarnação <span class="emoji">❤️</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "O que significa 'plenitude dos tempos'? ⏰",
+                            back: "O momento perfeito na história quando todas as condições estavam preparadas para a vinda de Cristo. 🎯"
+                        },
+                        {
+                            front: "Qual aliança Cristo estabeleceu? 📋",
+                            back: "A Nova Aliança, estabelecida em seu próprio sangue, superior a todas as anteriores. 🍷"
+                        },
+                        {
+                            front: "O que aconteceu em Pentecostes? 🔥",
+                            back: "A descida do Espírito Santo inaugurou a era da igreja e sua expansão mundial. 🌍"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Quem foi o apóstolo aos gentios? 🌍",
+                            options: [
+                                "Pedro",
+                                "João",
+                                "Paulo",
+                                "Tiago"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "Em que Cristo cumpriu a aliança davídica? 👑",
+                            options: [
+                                "Como profeta",
+                                "Como sacerdote",
+                                "Como rei eterno",
+                                "Como servo"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                }
+            },
+            {
+                number: "VIII",
+                title: "Igreja Patrística",
+                date: "100-600 d.C.",
+                description: "Os pais da igreja, desenvolvimento doutrinário, concílios ecumênicos e estabelecimento da ortodoxia cristã.",
+                emoji: "🏛️",
+                content: {
+                    main: `
+                        <h3>🏛️ Os Pais da Igreja</h3>
+                        <p>Período de <span class="highlight">desenvolvimento doutrinário</span> e defesa da fé ortodoxa contra heresias, culminando nos grandes concílios ecumênicos.</p>
+                        
+                        <div class="content-section">
+                            <h3>👴 Os Pais Apostólicos (100-150 d.C.)</h3>
+                            <p><strong>Clemente de Roma:</strong> Carta aos Coríntios sobre ordem eclesiástica <span class="emoji">📜</span></p>
+                            <p><strong>Inácio de Antioquia:</strong> Cartas sobre autoridade episcopal <span class="emoji">⛪</span></p>
+                            <p><strong>Policarpo:</strong> Discípulo de João, mártir fiel <span class="emoji">🔥</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🛡️ Os Apologistas (150-300 d.C.)</h3>
+                            <p><strong>Justino Mártir:</strong> Primeira grande apologética filosófica <span class="emoji">🤔</span></p>
+                            <p><strong>Irineu:</strong> Contra as heresias gnósticas <span class="emoji">⚔️</span></p>
+                            <p><strong>Tertuliano:</strong> Desenvolveu terminologia trinitária <span class="emoji">3️⃣</span></p>
+                            <p><strong>Orígenes:</strong> Grande teólogo alexandrino <span class="emoji">📚</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⚖️ Concílios Ecumênicos</h3>
+                            <p><strong>Niceia (325):</strong> Definição da divindade de Cristo <span class="emoji">👑</span></p>
+                            <p><strong>Constantinopla (381):</strong> Doutrina do Espírito Santo <span class="emoji">🕊️</span></p>
+                            <p><strong>Éfeso (431):</strong> Condenação do nestorianismo <span class="emoji">❌</span></p>
+                            <p><strong>Calcedônia (451):</strong> Duas naturezas de Cristo <span class="emoji">👤</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🌟 Grandes Pais</h3>
+                            <p><strong>Agostinho:</strong> Teólogo da graça, influência duradoura <span class="emoji">💎</span></p>
+                            <p><strong>João Crisóstomo:</strong> "Boca de Ouro", pregador eloquente <span class="emoji">🗣️</span></p>
+                            <p><strong>Jerônimo:</strong> Tradutor da Vulgata Latina <span class="emoji">📖</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "O que definiu o Concílio de Niceia? ⚖️",
+                            back: "A divindade plena de Cristo contra o arianismo, formulando o Credo Niceno. 👑"
+                        },
+                        {
+                            front: "Quem foi Agostinho de Hipona? 🌟",
+                            back: "O maior teólogo patrístico, doutor da graça, influenciou toda teologia posterior. 💎"
+                        },
+                        {
+                            front: "O que foi definido em Calcedônia? 👤",
+                            back: "Que Cristo possui duas naturezas (divina e humana) em uma só pessoa, sem confusão nem separação. ⚖️"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Qual concílio definiu a divindade de Cristo? ⛪",
+                            options: [
+                                "Constantinopla",
+                                "Niceia",
+                                "Éfeso",
+                                "Calcedônia"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Quem traduziu a Vulgata Latina? 📖",
+                            options: [
+                                "Agostinho",
+                                "Jerônimo",
+                                "Crisóstomo",
+                                "Ambrósio"
+                            ],
+                            correct: 1
+                        }
+                    ]
+                }
+            },
+            {
+                number: "IX",
+                title: "Igreja Medieval",
+                date: "600-1500 d.C.",
+                description: "Supremacia papal, escolasticismo, cruzadas, monasticismo e movimentos de reforma pré-protestantes.",
+                emoji: "🏰",
+                content: {
+                    main: `
+                        <h3>🏰 A Cristandade Medieval</h3>
+                        <p>Período de <span class="highlight">supremacia papal</span> e síntese entre fé cristã e cultura, mas também de crescente corrupção que preparou o caminho para a Reforma.</p>
+                        
+                        <div class="content-section">
+                            <h3>👑 Supremacia Papal (600-1000)</h3>
+                            <p><strong>Gregório Magno:</strong> Consolidação do poder papal <span class="emoji">⛪</span></p>
+                            <p><strong>Carlos Magno:</strong> Aliança entre igreja e império <span class="emoji">🤝</span></p>
+                            <p><strong>Cristandade:</strong> União de igreja, estado e sociedade <span class="emoji">🏛️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>💔 O Grande Cisma (1054)</h3>
+                            <p><strong>Igreja Católica Romana:</strong> Ocidente, primazia papal <span class="emoji">🇻🇦</span></p>
+                            <p><strong>Igreja Ortodoxa:</strong> Oriente, conciliarismo <span class="emoji">☦️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⚔️ As Cruzadas (1095-1291)</h3>
+                            <p>Expedições militares para recuperar a Terra Santa e expandir influência papal <span class="emoji">🗡️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>📚 Escolasticismo</h3>
+                            <p><strong>Anselmo:</strong> Argumento ontológico para existência de Deus <span class="emoji">🤔</span></p>
+                            <p><strong>Tomás de Aquino:</strong> Suma Teológica, síntese aristotélica <span class="emoji">📖</span></p>
+                            <p><strong>Duns Escoto:</strong> Ênfase na vontade divina <span class="emoji">💪</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🔥 Reformadores Pré-Protestantes</h3>
+                            <p><strong>John Wycliffe:</strong> Tradução da Bíblia, crítica papal <span class="emoji">📜</span></p>
+                            <p><strong>Jan Hus:</strong> Reforma da igreja checa <span class="emoji">🔥</span></p>
+                            <p><strong>Savonarola:</strong> Reforma moral em Florença <span class="emoji">⚖️</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "O que foi o Grande Cisma de 1054? 💔",
+                            back: "A separação definitiva entre as igrejas do Oriente (Ortodoxa) e Ocidente (Católica Romana). ⛪"
+                        },
+                        {
+                            front: "Qual foi a principal obra de Tomás de Aquino? 📚",
+                            back: "A Suma Teológica, síntese monumental entre teologia cristã e filosofia aristotélica. 📖"
+                        },
+                        {
+                            front: "Por que Jan Hus foi importante? 🔥",
+                            back: "Precursor da Reforma, pregou contra abusos papais e foi martirizado, inspirando movimentos reformistas. ⚔️"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Em que ano ocorreu o Grande Cisma? 📅",
+                            options: [
+                                "1054",
+                                "1095",
+                                "1215",
+                                "1453"
+                            ],
+                            correct: 0
+                        },
+                        {
+                            question: "Quem escreveu a Suma Teológica? 📚",
+                            options: [
+                                "Anselmo",
+                                "Tomás de Aquino",
+                                "Duns Escoto",
+                                "Agostinho"
+                            ],
+                            correct: 1
+                        }
+                    ]
+                }
+            },
+            {
+                number: "X",
+                title: "Reforma Protestante",
+                date: "1500-1650 d.C.",
+                description: "Lutero, Calvino, os Cinco Solas, reformas nacionais e a Contra-Reforma católica.",
+                emoji: "⚡",
+                content: {
+                    main: `
+                        <h3>⚡ A Grande Reforma</h3>
+                        <p>A Reforma Protestante restaurou os <span class="highlight">princípios bíblicos fundamentais</span> e rompeu com séculos de tradições não-bíblicas, retornando às Escrituras como única autoridade.</p>
+                        
+                        <div class="content-section">
+                            <h3>🔨 Martinho Lutero (1483-1546)</h3>
+                            <p><strong>95 Teses (1517):</strong> Contra a venda de indulgências <span class="emoji">📋</span></p>
+                            <p><strong>Três Tratados (1520):</strong> Fundamentos da Reforma <span class="emoji">📚</span></p>
+                            <p><strong>Dieta de Worms (1521):</strong> "Aqui estou, não posso fazer outra coisa" <span class="emoji">⚖️</span></p>
+                            <p><strong>Tradução alemã:</strong> Democratização das Escrituras <span class="emoji">📖</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🏆 Os Cinco Solas</h3>
+                            <p><strong>Sola Scriptura:</strong> Só a Escritura como autoridade <span class="emoji">📜</span></p>
+                            <p><strong>Sola Gratia:</strong> Só a graça como meio de salvação <span class="emoji">🎁</span></p>
+                            <p><strong>Sola Fide:</strong> Só a fé como instrumento <span class="emoji">🤝</span></p>
+                            <p><strong>Solus Christus:</strong> Só Cristo como mediador <span class="emoji">✝️</span></p>
+                            <p><strong>Soli Deo Gloria:</strong> Só a Deus toda glória <span class="emoji">👑</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⚖️ João Calvino (1509-1564)</h3>
+                            <p><strong>Institutas:</strong> Teologia sistemática reformada <span class="emoji">📚</span></p>
+                            <p><strong>Genebra:</strong> Modelo de cidade reformada <span class="emoji">🏙️</span></p>
+                            <p><strong>Predestinação:</strong> Doutrina da eleição soberana <span class="emoji">👑</span></p>
+                            <p><strong>Governo:</strong> Sistema presbiteriano <span class="emoji">⛪</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🇬🇧 Reforma Inglesa</h3>
+                            <p><strong>Henrique VIII:</strong> Separação de Roma (motivos políticos) <span class="emoji">💔</span></p>
+                            <p><strong>Elizabeth I:</strong> Estabelecimento anglicano definitivo <span class="emoji">👸</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⛪ Contra-Reforma</h3>
+                            <p><strong>Concílio de Trento:</strong> Resposta oficial católica <span class="emoji">📋</span></p>
+                            <p><strong>Jesuítas:</strong> Ordem militante de combate <span class="emoji">⚔️</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "Quais são os Cinco Solas da Reforma? 🏆",
+                            back: "Sola Scriptura, Sola Gratia, Sola Fide, Solus Christus, Soli Deo Gloria - princípios fundamentais reformados. ⚡"
+                        },
+                        {
+                            front: "O que foram as 95 Teses? 📋",
+                            back: "Proposições de Lutero contra a venda de indulgências, marco inicial da Reforma Protestante em 1517. 🔨"
+                        },
+                        {
+                            front: "Qual foi a principal obra de Calvino? 📚",
+                            back: "As Institutas da Religião Cristã, tratado sistemático da teologia reformada. ⚖️"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Em que ano Lutero publicou as 95 Teses? 📅",
+                            options: [
+                                "1515",
+                                "1517",
+                                "1520",
+                                "1521"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Qual Sola enfatiza apenas Cristo como mediador? ✝️",
+                            options: [
+                                "Sola Scriptura",
+                                "Sola Gratia",
+                                "Solus Christus",
+                                "Soli Deo Gloria"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                }
+            },
+            {
+                number: "XI",
+                title: "Ortodoxia Protestante",
+                date: "1650-1750 d.C.",
+                description: "Desenvolvimento confessional, teologia federal, puritanismo e sistematização doutrinária reformada.",
+                emoji: "📜",
+                content: {
+                    main: `
+                        <h3>📜 A Era Confessional</h3>
+                        <p>Período de <span class="highlight">sistematização teológica</span> e desenvolvimento das grandes confissões reformadas que definiram a ortodoxia protestante.</p>
+                        
+                        <div class="content-section">
+                            <h3>📋 Grandes Confissões</h3>
+                            <p><strong>Confissão de Augsburgo (1530):</strong> Fundação luterana <span class="emoji">🇩🇪</span></p>
+                            <p><strong>Confissão Belga (1561):</strong> Calvinismo nos Países Baixos <span class="emoji">🇳🇱</span></p>
+                            <p><strong>Confissão de Westminster (1646):</strong> Puritanismo inglês <span class="emoji">🇬🇧</span></p>
+                            <p><strong>Catecismo de Heidelberg (1563):</strong> Síntese reformada <span class="emoji">💎</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🤝 Teologia Federal (Aliancista)</h3>
+                            <p><strong>Johannes Cocceius:</strong> Sistematização da teologia federal <span class="emoji">📚</span></p>
+                            <p><strong>Hermann Witsius:</strong> Aprofundamento aliancista <span class="emoji">🔍</span></p>
+                            <p><strong>Distinção fundamental:</strong> Aliança das obras vs. aliança da graça <span class="emoji">⚖️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🎯 Puritanismo</h3>
+                            <p><strong>Richard Baxter:</strong> Teologia prática puritana <span class="emoji">💼</span></p>
+                            <p><strong>John Owen:</strong> Teologia da expiação e pneumatologia <span class="emoji">🔥</span></p>
+                            <p><strong>Thomas Watson:</strong> Exposição catequética clara <span class="emoji">📖</span></p>
+                            <p><strong>Jonathan Edwards:</strong> Teologia revivalista americana <span class="emoji">🇺🇸</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⚖️ Características da Ortodoxia</h3>
+                            <p>• Sistematização teológica rigorosa <span class="emoji">📐</span></p>
+                            <p>• Desenvolvimento confessional detalhado <span class="emoji">📋</span></p>
+                            <p>• Ênfase na educação teológica <span class="emoji">🎓</span></p>
+                            <p>• Polêmicas doutrinárias refinadas <span class="emoji">⚔️</span></p>
+                            <p>• Estabelecimento de tradições denominacionais <span class="emoji">⛪</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "O que é teologia federal? 🤝",
+                            back: "Sistema teológico reformado baseado nas alianças divinas, especialmente aliança das obras e da graça. ⚖️"
+                        },
+                        {
+                            front: "Qual é a confissão reformada mais influente? 📜",
+                            back: "A Confissão de Westminster (1646), padrão doutrinário de muitas igrejas presbiterianas mundialmente. 🌍"
+                        },
+                        {
+                            front: "Quem foi John Owen? 👨‍🎓",
+                            back: "Grande teólogo puritano, especialista em pneumatologia e teologia da expiação, 'Príncipe dos puritanos'. 🔥"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Qual confissão foi produzida pelos puritanos? 📋",
+                            options: [
+                                "Confissão Belga",
+                                "Confissão de Augsburgo",
+                                "Confissão de Westminster",
+                                "Catecismo de Heidelberg"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "Quem sistematizou a teologia federal? 🤝",
+                            options: [
+                                "João Calvino",
+                                "Johannes Cocceius",
+                                "John Owen",
+                                "Jonathan Edwards"
+                            ],
+                            correct: 1
+                        }
+                    ]
+                }
+            },
+            {
+                number: "XII",
+                title: "Pietismo e Avivamentos",
+                date: "1750-1850 d.C.",
+                description: "Movimento pietista, Grande Avivamento, Wesley, Whitefield, missões modernas e renovação espiritual.",
+                emoji: "🔥",
+                content: {
+                    main: `
+                        <h3>🔥 Renovação Espiritual</h3>
+                        <p>Movimento de <span class="highlight">renovação espiritual</span> que enfatizou a experiência pessoal com Deus e despertou grande zelo missionário mundial.</p>
+                        
+                        <div class="content-section">
+                            <h3>❤️ Pietismo Alemão</h3>
+                            <p><strong>Philipp Spener:</strong> Pia Desideria, reforma da vida cristã <span class="emoji">📖</span></p>
+                            <p><strong>August Francke:</strong> Educação cristã prática <span class="emoji">🎓</span></p>
+                            <p><strong>Zinzendorf:</strong> Comunidade morávia missionária <span class="emoji">🏘️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⚡ Grande Avivamento (1730-1750)</h3>
+                            <p><strong>Jonathan Edwards:</strong> Teólogo do avivamento em Northampton <span class="emoji">🇺🇸</span></p>
+                            <p><strong>George Whitefield:</strong> Pregador itinerante poderoso <span class="emoji">🎤</span></p>
+                            <p><strong>John Wesley:</strong> Metodismo, perfeicionismo cristão <span class="emoji">⛪</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🔥 Segundo Grande Avivamento (1800-1840)</h3>
+                            <p><strong>Charles Finney:</strong> Métodos revivalistas controversos <span class="emoji">📢</span></p>
+                            <p><strong>Asahel Nettleton:</strong> Avivamento reformado tradicional <span class="emoji">📚</span></p>
+                            <p><strong>Timothy Dwight:</strong> Avivamento acadêmico em Yale <span class="emoji">🎓</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🌍 Missões Modernas</h3>
+                            <p><strong>William Carey:</strong> "Pai das missões modernas" na Índia <span class="emoji">🇮🇳</span></p>
+                            <p><strong>Adoniram Judson:</strong> Pioneiro missionário na Birmânia <span class="emoji">🇲🇲</span></p>
+                            <p><strong>Hudson Taylor:</strong> Missões no interior da China <span class="emoji">🇨🇳</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>✨ Características do Período</h3>
+                            <p>• Ênfase na experiência pessoal com Deus <span class="emoji">❤️</span></p>
+                            <p>• Evangelismo itinerante e avivamentos <span class="emoji">🚶‍♂️</span></p>
+                            <p>• Expansão missionária mundial <span class="emoji">🌍</span></p>
+                            <p>• Movimentos de reforma social <span class="emoji">⚖️</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "Quem foi William Carey? 🌍",
+                            back: "Conhecido como 'Pai das missões modernas', missionário pioneiro na Índia que inspirou movimento missionário mundial. 🇮🇳"
+                        },
+                        {
+                            front: "O que caracterizou o Grande Avivamento? ⚡",
+                            back: "Movimento de renovação espiritual com pregação poderosa, conversões em massa e reforma moral (1730-1750). 🔥"
+                        },
+                        {
+                            front: "Qual foi a contribuição de Jonathan Edwards? 📚",
+                            back: "Teólogo-pastor do avivamento que combinou ortodoxia reformada com experiência espiritual intensa. 🎯"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Quem é conhecido como 'Pai das missões modernas'? 🌍",
+                            options: [
+                                "Hudson Taylor",
+                                "William Carey",
+                                "Adoniram Judson",
+                                "David Livingstone"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Qual movimento John Wesley fundou? ⛪",
+                            options: [
+                                "Pietismo",
+                                "Puritanismo",
+                                "Metodismo",
+                                "Pentecostalismo"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                }
+            },
+            {
+                number: "XIII",
+                title: "Igreja e Modernidade",
+                date: "1850-1950 d.C.",
+                description: "Crítica histórica, fundamentalismo vs. liberalismo, neo-ortodoxia, pentecostalismo e confronto com secularismo.",
+                emoji: "🏭",
+                content: {
+                    main: `
+                        <h3>🏭 O Desafio da Modernidade</h3>
+                        <p>A igreja enfrentou o maior desafio desde a Reforma: o <span class="highlight">secularismo moderno</span> e a crítica histórica das Escrituras.</p>
+                        
+                        <div class="content-section">
+                            <h3>🔍 Crítica Histórica</h3>
+                            <p><strong>Schleiermacher:</strong> Teologia liberal inicial baseada no sentimento <span class="emoji">💭</span></p>
+                            <p><strong>Wellhausen:</strong> Hipótese documentária do Pentateuco <span class="emoji">📜</span></p>
+                            <p><strong>Harnack:</strong> Essência do cristianismo sem sobrenaturalismo <span class="emoji">🔬</span></p>
+                            <p><strong>Schweitzer:</strong> Busca pelo Jesus histórico <span class="emoji">🔍</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⚔️ Fundamentalismo vs. Modernismo</h3>
+                            <p><strong>The Fundamentals (1910-1915):</strong> Defesa da ortodoxia <span class="emoji">🛡️</span></p>
+                            <p><strong>J. Gresham Machen:</strong> "Cristianismo e Liberalismo" <span class="emoji">📚</span></p>
+                            <p><strong>Controvérsia presbiteriana:</strong> Divisão denominacional <span class="emoji">💔</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>📖 Neo-ortodoxia</h3>
+                            <p><strong>Karl Barth:</strong> Comentário de Romanos, teologia dialética <span class="emoji">⚖️</span></p>
+                            <p><strong>Emil Brunner:</strong> Teologia da revelação e encontro <span class="emoji">🤝</span></p>
+                            <p><strong>Reinhold Niebuhr:</strong> Realismo cristão e teologia social <span class="emoji">🏙️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🔥 Pentecostalismo</h3>
+                            <p><strong>Charles Parham:</strong> Batismo no Espírito e glossolalia <span class="emoji">🗣️</span></p>
+                            <p><strong>William Seymour:</strong> Avivamento da Rua Azusa em LA <span class="emoji">⛪</span></p>
+                            <p><strong>Expansão mundial:</strong> Movimento de maior crescimento cristão <span class="emoji">🌍</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🌊 Características do Período</h3>
+                            <p>• Confronto direto com o secularismo <span class="emoji">⚔️</span></p>
+                            <p>• Debates sobre autoridade bíblica <span class="emoji">📖</span></p>
+                            <p>• Expansão missionária global intensificada <span class="emoji">✈️</span></p>
+                            <p>• Nascimento de movimentos carismáticos <span class="emoji">🔥</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "O que foi a controvérsia fundamentalista-modernista? ⚔️",
+                            back: "Debate entre ortodoxia bíblica (fundamentalistas) e crítica histórica liberal (modernistas) no início do século XX. 📚"
+                        },
+                        {
+                            front: "Quem foi Karl Barth? 📖",
+                            back: "Teólogo suíço da neo-ortodoxia que reagiu ao liberalismo, enfatizando a transcendência de Deus e autoridade da Palavra. ⚖️"
+                        },
+                        {
+                            front: "Onde começou o pentecostalismo moderno? 🔥",
+                            back: "No avivamento da Rua Azusa em Los Angeles (1906-1915) sob liderança de William Seymour. ⛪"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Quem escreveu 'Cristianismo e Liberalismo'? 📚",
+                            options: [
+                                "Karl Barth",
+                                "J. Gresham Machen",
+                                "Emil Brunner",
+                                "Reinhold Niebuhr"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Onde ocorreu o famoso avivamento pentecostal? 🔥",
+                            options: [
+                                "Chicago",
+                                "Nova York",
+                                "Los Angeles",
+                                "Atlanta"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                }
+            },
+            {
+                number: "XIV",
+                title: "Igreja Contemporânea",
+                date: "1950-presente",
+                description: "Movimento ecumênico, teologia da libertação, crescimento global, evangelicalismo e desafios atuais.",
+                emoji: "🌐",
+                content: {
+                    main: `
+                        <h3>🌐 A Igreja Global</h3>
+                        <p>A igreja contemporânea é caracterizada pela <span class="highlight">globalização do cristianismo</span> e enfrentamento de novos desafios culturais e éticos.</p>
+                        
+                        <div class="content-section">
+                            <h3>🤝 Movimento Ecumênico</h3>
+                            <p><strong>Conselho Mundial de Igrejas (1948):</strong> Busca pela unidade cristã <span class="emoji">🌍</span></p>
+                            <p><strong>Vaticano II (1962-1965):</strong> Abertura católica ao diálogo <span class="emoji">⛪</span></p>
+                            <p><strong>Diálogo inter-religioso:</strong> Engajamento com outras religiões <span class="emoji">🕊️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>✊ Teologia da Libertação</h3>
+                            <p><strong>Gustavo Gutiérrez:</strong> Opção preferencial pelos pobres <span class="emoji">❤️</span></p>
+                            <p><strong>Leonardo Boff:</strong> Eclesiologia libertadora <span class="emoji">⛪</span></p>
+                            <p><strong>Jon Sobrino:</strong> Cristologia latino-americana <span class="emoji">✝️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🌍 Cristianismo Global</h3>
+                            <p><strong>África:</strong> Crescimento explosivo e contextualização <span class="emoji">🌍</span></p>
+                            <p><strong>Ásia:</strong> Igreja emergente em contexto multirreligioso <span class="emoji">🏯</span></p>
+                            <p><strong>América Latina:</strong> Diversidade pentecostal e católica <span class="emoji">🌶️</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>📢 Evangelicalismo</h3>
+                            <p><strong>Billy Graham:</strong> Evangelismo de massa global <span class="emoji">📻</span></p>
+                            <p><strong>John Stott:</strong> Teologia evangélica equilibrada <span class="emoji">⚖️</span></p>
+                            <p><strong>Lausanne:</strong> Cooperação missionária mundial <span class="emoji">🤝</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>🎯 Teologia Reformada Contemporânea</h3>
+                            <p><strong>Cornelius Van Til:</strong> Apologética pressuposicional <span class="emoji">🧠</span></p>
+                            <p><strong>Herman Dooyeweerd:</strong> Filosofia reformacional <span class="emoji">💭</span></p>
+                            <p><strong>R.C. Sproul:</strong> Popularização da teologia reformada <span class="emoji">📺</span></p>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>⚡ Desafios Atuais</h3>
+                            <p>• Secularização ocidental progressiva <span class="emoji">🏙️</span></p>
+                            <p>• Pluralismo religioso e relativismo <span class="emoji">🌈</span></p>
+                            <p>• Questões bioéticas complexas <span class="emoji">🧬</span></p>
+                            <p>• Redefinição de sexualidade e família <span class="emoji">👨‍👩‍👧‍👦</span></p>
+                            <p>• Responsabilidade ambiental <span class="emoji">🌱</span></p>
+                        </div>
+                    `,
+                    flashcards: [
+                        {
+                            front: "O que caracteriza a igreja contemporânea? 🌐",
+                            back: "Globalização do cristianismo, crescimento no Sul Global, e enfrentamento de desafios seculares modernos. 🌍"
+                        },
+                        {
+                            front: "Qual foi o impacto do Vaticano II? ⛪",
+                            back: "Abertura da Igreja Católica ao diálogo ecumênico, liturgia vernácula e engajamento com mundo moderno. 🤝"
+                        },
+                        {
+                            front: "Quem foi R.C. Sproul? 📺",
+                            back: "Teólogo reformado que popularizou a teologia calvinista através de mídia moderna e ensino claro. 📚"
+                        }
+                    ],
+                    quiz: [
+                        {
+                            question: "Quando foi fundado o Conselho Mundial de Igrejas? 📅",
+                            options: [
+                                "1945",
+                                "1948",
+                                "1950",
+                                "1962"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Qual região tem o maior crescimento cristão atual? 🌍",
+                            options: [
+                                "Europa",
+                                "América do Norte",
+                                "África",
+                                "Oceania"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                }
             }
+        ];
 
-            // Show back to top button
-            document.querySelector('.back-to-top').style.display = 'block';
+        let currentPeriod = 0;
+
+        function renderPeriods() {
+            const grid = document.getElementById('periodsGrid');
+            grid.innerHTML = periods.map((period, index) => `
+                <div class="period-card" onclick="openModal(${index})">
+                    <div class="period-number">${period.number}</div>
+                    <div class="period-title">${period.emoji} ${period.title}</div>
+                    <div class="period-date">${period.date}</div>
+                    <div class="period-description">${period.description}</div>
+                    <div class="period-buttons">
+                        <button class="btn btn-primary" onclick="event.stopPropagation(); showContent(${index})">
+                            📖 Conteúdo
+                        </button>
+                        <button class="btn btn-secondary" onclick="event.stopPropagation(); showFlashcards(${index})">
+                            🃏 Flashcards
+                        </button>
+                        <button class="btn btn-success" onclick="event.stopPropagation(); showQuiz(${index})">
+                            🧠 Quiz
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function openModal(index) {
+            currentPeriod = index;
+            showContent(index);
         }
 
-        // Show/hide back to top button based on scroll position
-        window.addEventListener('scroll', function() {
-            const backToTopButton = document.querySelector('.back-to-top');
-            if (window.pageYOffset > 300) {
-                backToTopButton.style.display = 'block';
-            } else {
-                backToTopButton.style.display = 'none';
-            }
-        });
-
-        // Add smooth scrolling to timeline items
-        document.addEventListener('DOMContentLoaded', function() {
-            const timelineItems = document.querySelectorAll('.timeline-item');
+        function showContent(index) {
+            const period = periods[index];
+            const modal = document.getElementById('contentModal');
+            const content = document.getElementById('modalContent');
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            });
+            content.innerHTML = `
+                <h2>${period.emoji} ${period.title} (${period.date})</h2>
+                ${period.content.main}
+                <div style="margin-top: 30px;">
+                    <button class="btn btn-secondary" onclick="showFlashcards(${index})" style="margin-right: 10px;">
+                        🃏 Estudar Flashcards
+                    </button>
+                    <button class="btn btn-success" onclick="showQuiz(${index})">
+                        🧠 Fazer Quiz
+                    </button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            updateNavigation(index);
+        }
 
-            timelineItems.forEach(item => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(item);
+        function showFlashcards(index) {
+            const period = periods[index];
+            const content = document.getElementById('modalContent');
+            
+            content.innerHTML = `
+                <h2>🃏 Flashcards: ${period.title}</h2>
+                <div id="flashcardContainer">
+                    ${period.content.flashcards.map((card, i) => `
+                        <div class="flashcard" id="flashcard-${i}" onclick="flipCard(${i})">
+                            <div class="flashcard-content">
+                                ${card.front}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="showContent(${index})" style="margin-right: 10px;">
+                        📖 Voltar ao Conteúdo
+                    </button>
+                    <button class="btn btn-success" onclick="showQuiz(${index})">
+                        🧠 Fazer Quiz
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('contentModal').style.display = 'block';
+        }
+
+        function flipCard(cardIndex) {
+            const period = periods[currentPeriod];
+            const card = document.getElementById(`flashcard-${cardIndex}`);
+            const isFlipped = card.classList.contains('flipped');
+            
+            if (isFlipped) {
+                card.classList.remove('flipped');
+                card.querySelector('.flashcard-content').innerHTML = period.content.flashcards[cardIndex].front;
+            } else {
+                card.classList.add('flipped');
+                card.querySelector('.flashcard-content').innerHTML = period.content.flashcards[cardIndex].back;
+            }
+        }
+
+        function showQuiz(index) {
+            const period = periods[index];
+            const content = document.getElementById('modalContent');
+            
+            content.innerHTML = `
+                <h2>🧠 Quiz: ${period.title}</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quizProgress"></div>
+                </div>
+                <div id="quizContainer">
+                    ${period.content.quiz.map((question, i) => `
+                        <div class="quiz-container" id="quiz-${i}">
+                            <div class="quiz-question">${question.question}</div>
+                            ${question.options.map((option, j) => `
+                                <div class="quiz-option" onclick="selectAnswer(${i}, ${j}, ${question.correct})">
+                                    ${option}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `).join('')}
+                </div>
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="showContent(${index})" style="margin-right: 10px;">
+                        📖 Voltar ao Conteúdo
+                    </button>
+                    <button class="btn btn-secondary" onclick="showFlashcards(${index})">
+                        🃏 Estudar Flashcards
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('contentModal').style.display = 'block';
+        }
+
+        let answeredQuestions = 0;
+        let totalQuestions = 0;
+
+        function selectAnswer(questionIndex, answerIndex, correctIndex) {
+            const options = document.querySelectorAll(`#quiz-${questionIndex} .quiz-option`);
+            
+            options.forEach((option, index) => {
+                option.style.pointerEvents = 'none';
+                if (index === correctIndex) {
+                    option.classList.add('correct');
+                } else if (index === answerIndex && index !== correctIndex) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            answeredQuestions++;
+            totalQuestions = periods[currentPeriod].content.quiz.length;
+            updateQuizProgress();
+        }
+
+        function updateQuizProgress() {
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById('quizProgress').style.width = progress + '%';
+        }
+
+        function updateNavigation(index) {
+            const dots = document.querySelectorAll('.nav-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPeriods();
+            
+            // Modal close
+            document.querySelector('.close').onclick = function() {
+                document.getElementById('contentModal').style.display = 'none';
+                answeredQuestions = 0;
+            };
+            
+            // Navigation dots
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                dot.onclick = function() {
+                    openModal(index);
+                };
+            });
+            
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                const modal = document.getElementById('contentModal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    answeredQuestions = 0;
+                }
+            };
+        });
+
+        // Scroll animation for timeline
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.period-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
             });
         });
 
-        // Add keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                // Hide all sections and show introduction
-                showSection('introducao');
-            }
+        // Initialize cards animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.period-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'all 0.6s ease';
+                card.style.transitionDelay = (index * 0.1) + 's';
+            });
+            
+            setTimeout(() => {
+                cards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+            }, 500);
         });
     </script>
 </body>
 </html>
-
